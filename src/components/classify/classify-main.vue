@@ -1,6 +1,6 @@
 <template>
 	<!-- 分类页面的内容 -->
-	<div class="classify-main" v-if="isShow">
+	<div class="classify-main" v-if="!isShow">
 		<!-- 左侧内容 -->
 		<div class="left-content">
 			<ul class="content">
@@ -93,25 +93,25 @@ export default{
 @import url("../less/common.less");
 @import url("../less/reset.less");
 .classify-main{
+	position:relative;
 	width:100%;
+	height:100%;
 	margin-top:@navHeight;
 	margin-bottom:60px;
-	height:100%;
-	position:relative;
 	.left-content{
+		position:absolute;
+		z-index:1;
 		width:10%;
 		min-width:70px;
 		background-color:#eee;
-		position:absolute;
-		z-index:1;
 		.content{
 			height:100%;
 			li{
 				height:60px;
 				.titleStyle(#000,@textSize,center);
 				line-height:60px;
-				cursor: pointer;
 				-webkit-tap-highlight-color: transparent;
+				cursor: pointer;
 			}
 			.active{
 				background-color:white;
@@ -125,42 +125,43 @@ export default{
 			display:flex;
 			flex-direction:row;
 			.right-content-left{
+				z-index:0;
 				width:10%;
 				min-width:70px;
-				z-index:0;
 			}
 			.right-content-right{
 				width:90%;
 				h4{
 					height:40px;
-					line-height:40px;
 					font-size:14px;
 					font-weight:700;
+					line-height:40px;
 				}
 				.content-detail{
-					margin-left:5%;
 					.flexRowCenter();
 					justify-content:center;
 					flex-wrap:wrap;
+					margin-left:5%;
 					li{
-						margin-right:5%;
 						width:25%;
-						background-color:white;
-						border:1px solid #eee;
-						border-radius:8px;
+						margin-right:5%;
 						margin-bottom:5px;
+						border:1px solid #eee;
+						background-color:white;
+						border-radius:8px;
+						cursor:pointer;
 						img{
-							margin-top:5px;
 							width:100%;
 							height:70%;
+							margin-top:5px;
 							border-bottom:2px solid #f7f7f7;
 						}
 						p{
 							width:100%;
 							height:25px;
-							line-height:25px;
-							font-size:12px;
 							text-align:center;
+							font-size:12px;
+							line-height:25px;
 						}
 					}
 				}

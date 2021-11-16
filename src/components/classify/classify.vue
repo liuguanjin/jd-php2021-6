@@ -1,6 +1,6 @@
 <template>
   <div class="classify">
-  	<classify-head :show="isShowContent"></classify-head>
+  	<classify-head :show="isShowContent" :isShow="isShow" :noShow="noShowContent"></classify-head>
   	<classify-content :isShow="isShow"></classify-content>
   </div>
 </template>
@@ -11,12 +11,15 @@ import classifyContent from "./classify-main.vue";
 export default {
 	data(){
 		return{
-			isShow:true
+			isShow:false
 		}
 	},
 	methods:{
 		isShowContent(){
-			this.isShow = !this.isShow;
+			this.isShow = true;
+		},
+		noShowContent(){
+			this.isShow = false;
 		}
 	},
  	components:{

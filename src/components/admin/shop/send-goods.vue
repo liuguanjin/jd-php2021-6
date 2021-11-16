@@ -1,5 +1,6 @@
 <template>
 	<div class="send-goods">
+		<!-- 后台发货界面 -->
 		<!-- 全部商品列表表格 -->
 		<el-table
 	    :data="nosendGoodsList"
@@ -17,6 +18,7 @@
 	    	prop="goods_name"
 	    	label="商品名称"
 	    	align="center"
+	    	class-name="goods_name"
 	    	>
 		    </el-table-column>
 		    <el-table-column
@@ -187,6 +189,7 @@
 </script>
 
 <style lang="less" scoped>
+.send-goods{
 	img{
 		width:80px;
 		height:80px;
@@ -199,4 +202,28 @@
 	.remind{
 		color:red;
 	}
+	.el-table{
+		/deep/ td.goods_name{
+			.cell{
+				display:block;
+				display:-webkit-box;
+				over-flow:hidden;
+				height:69px;
+				line-height:23px;
+				-webkit-line-clamp:3;
+				-webkit-box-orient:vertical;
+				text-overflow:ellipsis;
+			}
+		}
+		/deep/ td.goods_name:hover{
+			.cell{
+				display:block;
+				over-flow:visible;
+				height:100%;
+				cursor: pointer;
+			}
+		}
+	}
+}
+
 </style>

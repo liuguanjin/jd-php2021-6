@@ -59,9 +59,9 @@ export default {
 	.collect{
 		.header{
 			.flexRowCenter();
-			background-color:#eee;
 			justify-content:flex-start;
 			height:30px;
+			background-color:#eee;
 			line-height:30px;
 			p{
 				margin:0 auto;
@@ -73,38 +73,38 @@ export default {
 		}
 		.collect-content{
 			div.collect-good:hover{
-				cursor:pointer;
 				color:pink;
 			}
 			.collect-good{
-				background-color:white;
+				.flexRowCenter();
 				margin:10px auto;
 				padding:10px;
+				background-color:white;
 				border-radius:10px;
-				.flexRowCenter();
+				cursor:pointer;
 				img{
+					align-self:flex-start;
 					width:100px;
 					height:100px;
-					align-self:flex-start;
 				}
 				div{
-					margin-left:10px;
-					align-self:flex-start;
 					.flexColumnCenter();
+					align-self:flex-start;
+					margin-left:10px;
 					p{
 						margin:0;
 						padding:0;
 					}
 					.title{
+						overflow:hidden;
+						width:100%;
 						height:40px;
 						line-height:20px;
-						overflow:hidden;
 						text-overflow:ellipsis;
-						width:100%;
 					}
 					.price{
-						margin-top:30px;
 						align-self:flex-start;
+						margin-top:30px;
 						color:@mallColor;
 					}
 				}

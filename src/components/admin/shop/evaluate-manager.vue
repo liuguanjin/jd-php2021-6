@@ -1,6 +1,6 @@
 <template>
 	<div class="evaluate-manager">
-		
+		这里是评价管理界面
 	</div>
 </template>
 

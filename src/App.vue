@@ -34,7 +34,6 @@
 // 引入tabbar
 import tabbar from "./components/tabbar.vue";
 import axios from "axios";
-import qs from "qs";
 //使用vuex保存登录状态
 import {mapActions,mapState} from "vuex";
 export default {

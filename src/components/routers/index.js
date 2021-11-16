@@ -21,7 +21,7 @@ import Regist from "@/components/mine/public/regist.vue";
 //前台登录成功界面
 import LoginSuccess from "@/components/mine/public/loginSuccess.vue";
 //前台分类详情界面
-import classifyDetail from "@/components/classify/classify-detail.vue";
+import ClassifyDetail from "@/components/classify/classify-detail.vue";
 //前台登录成功进入设置界面
 import Setting from "@/components/mine/public/setting.vue";
 //前台首页分类进入各分类界面
@@ -103,16 +103,40 @@ import Crowdfundingmanager from '@/components/admin/shop/crowdfunding_manager.vu
 import Paymanager from '@/components/admin/shop/pay_manager.vue';
 //后台商城店铺管理界面
 import StoreList from '@/components/admin/shop/store_list.vue';
-//后台已售出宝贝界面
+//后台商城已售出宝贝界面
 import SoldGoods from '@/components/admin/shop/sold-goods.vue';
-//后台发布宝贝界面
+//后台商城发布宝贝界面
 import ReleaseGoods from '@/components/admin/shop/release-goods.vue';
-//后台发货界面
+//后台商城发货界面
 import SendGoods from '@/components/admin/shop/send-goods.vue';
-//后台评价管理界面
+//后台商城评价管理界面
 import EvaluateManager from '@/components/admin/shop/evaluate-manager.vue';
-//后台管理界面
+//后台运营界面
 import Operator from '@/components/admin/operator.vue';
+//后台运营店铺推荐界面
+import RecommendShops from '@/components/admin/operator/recommend_shops.vue';
+//后台运营商品推荐界面
+import RecommendGoods from '@/components/admin/operator/recommend_goods.vue';
+//后台运营品牌推荐界面
+import RecommendBrand from '@/components/admin/operator/recommend_brand.vue';
+//后台运营商品销售排行界面
+import TotalGoods from '@/components/admin/operator/total_goods.vue';
+//后台运营店铺销售排行界面
+import TotalShops from '@/components/admin/operator/total_shops.vue';
+//后台运营销售额统计界面
+import TotalMoney from '@/components/admin/operator/total_money.vue';
+//后台运营销售订单统计界面
+import TotalOrder from '@/components/admin/operator/total_order.vue';
+//后台运营新增会员统计界面
+import TotalNewvip from '@/components/admin/operator/total_newvip.vue';
+//后台运营资金管理界面
+import MoneyManager from '@/components/admin/operator/money_manager.vue';
+//后台运营提现申请界面
+import MoneyTixian from '@/components/admin/operator/money_tixian.vue';
+//后台运营结算申请界面
+import MoneyJiesuan from '@/components/admin/operator/money_jiesuan.vue';
+//后台运营商家结算界面
+import MoneyJiesuanShop from '@/components/admin/operator/money_jiesuan_shop.vue';
 //个人中心收货地址界面
 import Address from '@/components/mine/public/address.vue';
 //个人中心添加收货地址界面
@@ -133,8 +157,10 @@ import MyAccount from '@/components/mine/public/myAccount.vue';
 import MyMessage from '@/components/mine/public/myMessage.vue';
 //前台修改昵称界面
 import Nickname from '@/components/mine/public/nickname.vue';
-//前天修改个性签名界面
-import PersonStatus from '@/components/mine/public/personStatus.vue'
+//前台修改个性签名界面
+import PersonStatus from '@/components/mine/public/personStatus.vue';
+//前台分类 商品搜索界面
+import SearchResult from '@/components/classify/classify-result.vue';
 //配置routes
 var routes = [
 	{path:"/",redirect:"/home"},
@@ -217,11 +243,27 @@ var routes = [
 					{path:'/evaluatemanager',component:EvaluateManager,meta:{title:"评价管理",keepAlive:false}},
 				]
 			},
-			{path:'/operator',component:Operator,meta:{title:"后台运营",keepAlive:false}}
+			{path:'/operator',component:Operator,meta:{title:"后台运营",keepAlive:false},
+				children:[
+					{path:'/recommendshops',component:RecommendShops,meta:{title:"店铺推荐",keepAlive:false}},
+					{path:'/recommendgoods',component:RecommendGoods,meta:{title:"商品推荐",keepAlive:false}},
+					{path:'/recommendbrand',component:RecommendBrand,meta:{title:"品牌推荐",keepAlive:false}},
+					{path:'/totalgoods',component:TotalGoods,meta:{title:"商品销售排行",keepAlive:false}},
+					{path:'/totalshops',component:TotalShops,meta:{title:"店铺销售排行",keepAlive:false}},
+					{path:'/totalmoney',component:TotalMoney,meta:{title:"销售额统计",keepAlive:false}},
+					{path:'/totalorder',component:TotalOrder,meta:{title:"销售订单统计",keepAlive:false}},
+					{path:'/totalnewvip',component:TotalNewvip,meta:{title:"新增会员统计",keepAlive:false}},
+					{path:'/moneymanager',component:MoneyManager,meta:{title:"资金管理",keepAlive:false}},
+					{path:'/moneytixian',component:MoneyTixian,meta:{title:"提现申请",keepAlive:false}},
+					{path:'/moneyjiesuan',component:MoneyJiesuan,meta:{title:"结算申请",keepAlive:false}},
+					{path:'/moneyjiesuanshop',component:MoneyJiesuanShop,meta:{title:"商家结算",keepAlive:false}},
+				]
+			}
 		]
 	},
 	{path:"/foot",component:Foot,meta:{title:"足迹",keepAlive:false}},
-	{path:"/classify-detail",name:'classify-detail',component:classifyDetail,meta:{title:"分类详情",keepAlive:false}},
+	{path:"/classify-detail",name:'classify-detail',component:ClassifyDetail,meta:{title:"分类详情",keepAlive:false}},
+	{path:"/classify-result",name:'classify-result',component:SearchResult,meta:{title:"搜索结果",keepAlive:false}},
 ];
 // router对象实例化
 var router = new VueRouter({

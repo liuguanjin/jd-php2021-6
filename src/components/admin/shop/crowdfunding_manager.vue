@@ -1,6 +1,6 @@
 <template>
 	<div class="crowdfunding_manager">
-		
+		这里是支付管理界面
 	</div>
 </template>
 

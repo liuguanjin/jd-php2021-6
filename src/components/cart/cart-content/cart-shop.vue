@@ -91,6 +91,8 @@ export default {
  		})
  	},
  	created(){
+ 		//根据vuex中的cartArr数组获取购物车商品的数据
+ 		//其中vuex的数据在页面加载时即在app.vue中获取
  		this.$homehttp({
  			url:'cart',
  			method:'post',
@@ -206,6 +208,14 @@ export default {
 					this.addCollectGoods(goods_ids[i]);
 				}
 				this.isShowCollectSuccess = true;
+				var user_id = userinfo.user_id;
+				this.$homehttp({
+		      		url:'footprint/'+user_id,
+		      		method:'put',
+		      		data:this.footprintArr
+	    		}).then(result=>{
+
+	    		})
 				setTimeout(()=>{
 					this.isShowCollectSuccess = false;
 				},2000)
@@ -229,28 +239,28 @@ export default {
 <style lang="less" scoped>
 @import url("../../less/common.less");
 	.cart-shop{
-		background-color:#eee;
 		margin-bottom:60px;
+		background-color:#eee;
 		.addcommon{
-			width:120px;
-			height:100px;
-			background-color:rgba(0,0,0,0.7);
-			border:1px solid rgba(255,255,255,0.7);
 			position:absolute;
 			top:50%;
 			left:50%;
-			margin-left:-50px;
-			margin-top:-50px;
 			.flexColumnCenter();
 			justify-content:center;
+			width:120px;
+			height:100px;
+			margin-left:-50px;
+			margin-top:-50px;
+			border:1px solid rgba(255,255,255,0.7);
+			background-color:rgba(0,0,0,0.7);
 			p{
 				margin:0 auto;
 				padding:0;
 			}
 			.el-icon-check{
 				padding:10px;
-				border-radius:50%;
 				font-size:16px;
+				border-radius:50%;
 			}
 		}
 		.addFailed{
@@ -259,9 +269,9 @@ export default {
 			}
 			.el-icon-close{
 				padding:10px;
-				border-radius:50%;
 				border:1px solid red;
 				color:red;
+				border-radius:50%;
 			}
 		}
 		.addSuccess{
@@ -274,38 +284,38 @@ export default {
 			}
 		}
 		.icon-common{
+			width:20px;
+			height:20px;
 			margin-left:5px;
 		    background-image: url(//wq.360buyimg.com/wxsq_trade/cart_vue/main/images/sprite.img_default_437_c4816605.png);
 			background-position: -80px 0;
 			background-size: 116px 110px;
-			width:20px;
-			height:20px;
 		}
 		.icon-select{
+			width:20px;
+			height:20px;
 			margin-left:5px;
 		    background-image: url(//wq.360buyimg.com/wxsq_trade/cart_vue/main/images/sprite.img_default_437_c4816605.png);
 			background-position: -80px -40px;
 			background-size: 116px 110px;
-			width:20px;
-			height:20px;
 		}
 		.cart-foor{
-			width:100%;
-			max-width:800px;
 			position:fixed;
 			bottom:56px;
-			z-index:100;
-			background-color:#fff;
-			border-top:1px solid #eee;
-			padding-top:5px;
 			.flexRowCenter();
 			justify-content:space-between;
+			z-index:100;
+			width:100%;
+			max-width:800px;
+			padding-top:5px;
+			border-top:1px solid #eee;
+			background-color:#fff;
 			.choose{
 				.flexColumnCenter();
 				p{
-					padding:0;
 					margin:0;
 					margin-left:5px;
+					padding:0;
 					color:gray;
 				}
 			}
@@ -313,8 +323,8 @@ export default {
 				.flexRowCenter();
 				p{
 					margin:0;
-					padding:0;
 					margin-right:20px;
+					padding:0;
 					font-size:20px;
 					font-weight:250;
 				}
@@ -326,38 +336,39 @@ export default {
 				.flexRowCenter();
 				p{
 					margin:0;
-					padding:0;
 					margin-right:5px;
+					padding:0;
 				}
 				.collect{
+					width:90px;
+					height:32px;
+					border:1px solid #FF5000;
+					text-align:center;
+					line-height:30px;
 					color:#FF5000;
 					border-radius:15px;
-					border:1px solid #FF5000;
-					width:90px;
-					height:32px;
-					line-height:30px;
-					text-align:center;
+					cursor: pointer;
 				}
 				.move{
-					color:#FC0A0A;
-					border-radius:15px;
-					border:1px solid #FC0A0A;
 					width:90px;
 					height:32px;
-					line-height:30px;
+					border:1px solid #FC0A0A;
 					text-align:center;
+					line-height:30px;
+					color:#FC0A0A;
+					border-radius:15px;
 				}
 			}
 		}
 		.shop{
 			margin-bottom:120px;
 			.shop-detail{
+				z-index:2;
 				width:90%;
 				margin:0 auto;
-				background-color:#fff;
-				border-radius:15px;
 				margin-top:10px;
-				z-index:2;
+				border-radius:15px;
+				background-color:#fff;
 				.shop-title{
 					.flexRowCenter();
 					.el-icon-s-shop{
@@ -371,8 +382,8 @@ export default {
 						font-weight:600;
 					}
 					p:hover{
-						cursor:pointer;
 						color:#FF4400;
+						cursor:pointer;
 					}
 				}
 				
@@ -389,37 +400,41 @@ export default {
 					img{
 						width:100px;
 						height:100px;
+						cursor:pointer;
 					}
 					.shop-des{
-						margin:0 8px;
-						width:61%;
 						.flexColumnCenter();
+						width:61%;
+						margin:0 8px;
 						.title{
-							font-size:14px;
-							height:40px;
-							line-height:20px;
 							overflow:hidden;
+							height:40px;
 							margin:0;
+							font-size:14px;
+							line-height:20px;
+							cursor:pointer;
 						}
 						p.title:hover{
-							cursor:pointer;
 							color:#FF4400;
 						}
 						.des{
 							width:100%;
-							background-color:#f7f7f7;
 							margin:5px 0;
+							background-color:#f7f7f7;
 						}
 						.shop-num{
-							width:100%;
-							margin:0;
 							.flexRowCenter();
 							justify-content:space-between;	
+							width:100%;
+							margin:0;
 							.price{
 								color:@mallColor;
 							}
 							.addOrDel{
 								.flexRowCenter();
+								i{
+									cursor: pointer;
+								}
 							}
 						}
 					}

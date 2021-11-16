@@ -1,6 +1,6 @@
 <template>
   	<div class="address">
-  		<div class="address-head">
+  		<div class="header">
   			<i class="el-icon-back back" @click="back"></i>
       		<p class="head-center">我的收货地址</p>
       		<p @click="addAddress" class="add-address">添加新地址</p>
@@ -42,8 +42,12 @@
 			if (this.$route.query.goods_ids) {
 				this.goods_ids = this.$route.query.goods_ids;
 			}
+			if (this.$route.query.fromBalance) {
+				this.fromBalance = true;
+			}
 			this.getAddress();
 		},
+		/*
 		beforeRouteEnter(to,from,next){
 			if (from.path == '/balance') {
 				next(vm=>{
@@ -55,6 +59,7 @@
 				})
 			}
 		},
+		*/
 		data(){
 			return {
 				user_id:0,
@@ -70,10 +75,29 @@
 				}
 			},
 			back(){
-				this.$router.go(-1);
+				if (this.fromBalance) {
+					var arr = this.addressList.filter((element,index,self)=>{
+									if (element.is_default == 1) {
+										return true;
+									}
+									return false;
+								})
+					if (arr.length == 0) {
+						arr = this.addressList[0];
+					}else{
+						arr = arr[0];
+					}
+					this.$router.push({name:'balance',query:{address:arr,goods_ids:this.goods_ids}})
+				}else{
+					this.$router.push({name:'setting',query:{id:this.user_id}});
+				}
 			},
 			addAddress(){
-				this.$router.push({name:'addAddress',query:{user_id:this.user_id}})
+				if (this.fromBalance) {
+					this.$router.push({name:'addAddress',query:{user_id:this.user_id,fromBalance:true,goods_ids:this.goods_ids}}); 
+				}else{
+					this.$router.push({name:'addAddress',query:{user_id:this.user_id}});
+				}
 			},
 			getAddress(){
 				this.$homehttp({
@@ -88,7 +112,11 @@
 				})
 			},
 			editAddress(id){
-				this.$router.push({name:'editAddress',query:{id:id,user_id:this.user_id}});
+				if (this.fromBalance) {
+					this.$router.push({name:'editAddress',query:{id:id,user_id:this.user_id,fromBalance:true,goods_ids:this.goods_ids}}); 
+				}else{
+					this.$router.push({name:'editAddress',query:{id:id,user_id:this.user_id}});
+				}
 			},
 		}
 	}
@@ -96,32 +124,34 @@
 
 <style lang="less" scoped>
 	.address{
-		.address-head{
+		.header{
 		 	position: relative;
 	      	height:44px;
-	      	line-height:44px;
 	      	background-color:#eee;
+	      	line-height:44px;
 	      	.back{
 	      		position:absolute;
 	      		left:20px;
 	      		height:44px;
-        		line-height:44px;
         		font-size:20px;
+        		line-height:44px;
+        		cursor: pointer;
 	      	}
       	 	.head-center{
-		        text-align:center;
-		        font-weight:bold;
 		        margin:0;
+		        font-weight:bold;
+		        text-align:center;
       		}
       		.add-address{
       			position:absolute;
       			right:10px;
       			top:0;
       			height:44px;
-        		line-height:44px;
-		        text-align:center;
-        		font-size:16px;
 		        margin:0;
+        		line-height:44px;
+        		font-size:16px;
+		        text-align:center;
+		        cursor: pointer;
       		}
 		}
 		.address-content{
@@ -130,36 +160,36 @@
 			justify-content:center;
 			align-items:center;
 			.address-li{
-				margin:22px 0;
-				width:100%;
 				display:flex;
 				flex-direction:row;
 				justify-content:center;
 				align-items:center;
+				width:100%;
+				margin:22px 0;
 				padding-bottom:10px;
 				border-bottom:1px solid #eee;
 				.sign{
 					display:inline-block;
+					overflow: hidden;
 					width:25px;
 					height:25px;
-					line-height:25px;
-					overflow: hidden;
-					border-radius:50%;
 					background-color:#eee;
+					line-height:25px;
+					border-radius:50%;
 				}
 				.li-span{
 					width:12%;
-					text-align:center;
 					height:20px;
 					line-height:20px;
 					text-align:center;
 				}
 				.address-message{
 					width:76%;
+					cursor: pointer;
 					.message-header{
 						.consignee{
-							font-size:16px;
 							margin-right:10px;
+							font-size:16px;
 						}
 						.phone{
 							font-size:12px;
@@ -187,6 +217,7 @@
 				}
 				.edit{
 					border-left:1px solid #eee;
+					cursor: pointer;
 				}
 			}
 		}

@@ -1,5 +1,6 @@
 <template>
 	<div class="order_manager">
+		<!-- 后台菜单管理界面 -->
 		<!-- 菜单管理界面头部显示 -->
 		<el-breadcrumb separator-class="el-icon-arrow-right">
 			<el-breadcrumb-item :to="{ path: '/platform' }">平台</el-breadcrumb-item>
@@ -313,11 +314,9 @@ export default {
 		},
 		//添加权限会话中选中改变pid值
 		change(h){
-			//console.log(h);
 			this.addAuthData.pid = h[h.length-1];
 		},
 		createAuthChange(h){
-			//console.log(h);
 			this.authDetailData.pid = h[h.length-1];
 		},
 		//删除权限逻辑 发送请求
@@ -378,8 +377,8 @@ export default {
 		margin-bottom:10px;
 	}
 	.search{
-		margin-top:10px;
 		display:flex;
 		flex-direction:row;
+		margin-top:10px;
 	}
 </style>

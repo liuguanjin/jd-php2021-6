@@ -1,5 +1,6 @@
 <template>
 	<div class="admin_manager">
+		<!-- 后台管理员管理界面 -->
 		<!-- 管理员管理界面头部显示 -->
 		<el-breadcrumb separator-class="el-icon-arrow-right">
 			<el-breadcrumb-item :to="{ path: '/platform' }">平台</el-breadcrumb-item>
@@ -355,6 +356,7 @@ export default {
 			this.createAdminData.role_id = row;
 		},
 		deleteAdmin(id){
+			//删除管理员
 			this.$http({
 				url:'admins/'+id,
 				method:'delete'
@@ -380,9 +382,9 @@ export default {
 		margin-bottom:10px;
 	}
 	.search{
-		margin-top:10px;
 		display:flex;
 		flex-direction:row;
+		margin-top:10px;
 	}
 	.el-pagination{
 		display:flex;

@@ -181,13 +181,13 @@
 		height:100%;
 		min-height:800px;
 		.head{
-			width:100%;
-			background-color:#eee;
 			display:flex;
 			flex-direction:row;
 			justify-content:space-between;
 			align-items:center;
+			width:100%;
 			height:40px;
+			background-color:#eee;
 			line-height:40px;
 			.back{
 				margin-left:10px;
@@ -201,10 +201,10 @@
 			}
 		}
 		.img{
-			width:90%;
 			display:flex;
 			flex-direction:column;
 			align-items:center;
+			width:90%;
 			padding:30px 0;
 			border-bottom:1px solid #eee;
 			img{
@@ -220,10 +220,10 @@
 			}
 		}
 		.username{
-			width:90%;
 			display:flex;
 			flex-direction:row;
 			justify-content:space-between;
+			width:90%;
 			padding:16px 0;
 			border-bottom:1px solid #eee;
 			cursor:pointer;
@@ -232,10 +232,10 @@
 			}
 		}
 		.after{
-			width:90%;
 			display:flex;
 			flex-direction:row;
 			justify-content:space-between;
+			width:90%;
 			padding:16px 0;
 			border-bottom:1px solid #eee;
 			cursor:pointer;
@@ -258,23 +258,23 @@
 			bottom:0;
 			left:0;
 			right:0;
-			margin:0 auto;
-			max-width:800px;
-			width:100%;
-			height:100%;
-			background-color:rgba(0,0,0,0.7);
 			z-index:100;
+			width:100%;
+			max-width:800px;
+			height:100%;
+			margin:0 auto;
+			background-color:rgba(0,0,0,0.7);
 			transition:all 1s;
 			.sex-options{
 				position:absolute;
 				bottom:100px;
 				width:100%;
-				background-color:white;
 				padding:10px 0;
+				background-color:white;
 				p{
 					width:60%;
-					padding:10px 0;
 					margin:30px auto;
+					padding:10px 0;
 					border-bottom:1px solid #eee;
 					text-align:center;
 					cursor:pointer;

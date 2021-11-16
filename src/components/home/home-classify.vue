@@ -59,17 +59,18 @@ export default {
 		.flexRowCenter();
 		flex-wrap:wrap;
 		.classify-item{
-			margin-top:@commonMargin;
-			width:20%;
 			.flexColumnCenter();
+			width:20%;
+			margin-top:@commonMargin;
+			cursor: pointer;
 			img{
+				flex:1;
 				width:43px;
 				height:43px;
-				flex:1;
 			}
 			p{
-				.titleStyle(#000,12px,center);
 				flex:1;
+				.titleStyle(#000,12px,center);
 			}
 		}
 	}

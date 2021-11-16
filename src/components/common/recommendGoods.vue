@@ -45,7 +45,6 @@
 					if (code == 200) {
 						this.goods = data;
 					}
-					console.log(this.goods);
 				})
 			},
 			enterDetail(id,e){
@@ -68,59 +67,59 @@
 		.flexRowCenter();
 		justify-content:center;
 		flex-wrap:wrap;
-		margin-bottom:60px;
 		.content-item{
-			background-color:#fff;
-			border-radius:15px;
-			margin-top:10px;
-			margin-left:@commonMargin;
 			.flexColumnCenter();
 			width:47%;
+			margin-top:10px;
+			margin-left:@commonMargin;
+			border-radius:15px;
+			background-color:#fff;
 			img{
 				width:100%;
 				margin:0;
+				cursor:pointer;
 			}
 			p.title:hover{
-				cursor:pointer;
 				color:#FF4400;
 			}
 			.title{
+				overflow:hidden;
+				height:40px;
+				margin:5px;
 				font-size:@textSize;
 				line-height:20px;
-				height:40px;
-				overflow:hidden;
-				margin:5px;
+				cursor:pointer;
 			}
 			.goods-bottom{
-				width:100%;
 				.flexRowCenter();
 				justify-content:space-between;
+				width:100%;
 				.price-number{
 					.price{
-						font-size:14px;
 						align-self:flex-start;
-						color:@mallColor;
 						margin:5px;
+						font-size:14px;
+						color:@mallColor;
 					}
 					.number{
-						font-size:14px;
 						align-self:flex-start;
-						color:@mallColor;
 						margin:5px;
+						font-size:14px;
+						color:@mallColor;
 					}
 				}
 				.shop_name{
+					align-self:flex-end;
 					margin:0;
+					margin-right:10px;
+					margin-bottom:5px;
 					padding:0;
 					font-size:14px;
-					align-self:flex-end;
-					margin-bottom:5px;
-					margin-right:10px;
 				}
 				p.shop_name:hover{
-					cursor:pointer;
-					text-decoration:underline;
 					color:#FF4400;
+					text-decoration:underline;
+					cursor:pointer;
 				}
 			}
 		}

@@ -109,7 +109,6 @@
 <script>
 import {mapState,mapActions} from "vuex";
 import axios from "axios";
-import qs from "qs";
 export default {
   mounted(){
 
@@ -278,50 +277,53 @@ export default {
 <style lang="less" scoped>
   @import url("../../less/common.less");
   .login-success{
+      height:1024px;
+      background-color:#eee;
       .weight{
           margin-left:10px;
           font-weight:bold;
       }
       .gray{
-          cursor:pointer;
           color:gray;
+          cursor:pointer;
       }
-      height:1024px;
-      background-color:#eee;
       .logsuc-header{
-          height:180px;
-          background-color:#FF5C00;
-          margin-bottom:10px;
           .flexColumnCenter();
+          height:180px;
+          margin-bottom:10px;
+          background-color:#FF5C00;
           .head-top{
-              margin-top:10px;
-              width:100%;
               .flexRowCenter();
               justify-content:space-between;
+              width:100%;
+              margin-top:10px;
               .head-img{
                   .flexRowCenter();
                   align-self:flex-start;
                   img{
                       width:50px;
                       height:50px;
-                      border-radius:50%;
                       margin:0 10px;
+                      border-radius:50%;
                   }
               }
               .iconbox{
                    margin-top:-20px;
                    margin-right:20px;
                    font-size:20px;
+                   .el-icon-s-tools{
+                    cursor: pointer;
+                   }
               }
           }
           .head-bottom{
-              margin-top:20px;
-              width:100%;
               .flexRowCenter();
+              width:100%;
+              margin-top:20px;
               div{
-                  cursor:pointer;
-                  width:25%;
                   .flexColumnCenter();
+                  width:25%;
+                  cursor:pointer;
                   p{
                       margin:5px 0;
                       padding:0;
@@ -330,38 +332,38 @@ export default {
           }
       }
       .order{
+          .flexColumnCenter();
           width:95%;
-          border-radius:15px;
           margin:0 auto;
-          background-color:#fff;
           margin-top:-30px;
           margin-bottom:10px;
-          .flexColumnCenter();
+          border-radius:15px;
+          background-color:#fff;
           .myorder{
-              width:100%;
               .flexRowCenter();
               justify-content:space-between;
+              width:100%;
               border-bottom:1px solid #eee;
           }
           .order-detail{
-              width:100%;
               .flexRowCenter();
+              width:100%;
               margin-top:15px;
               div{
-                  cursor:pointer;
-                  width:25%;
-                  .flexColumnCenter();
                   position:relative;
+                  .flexColumnCenter();
+                  width:25%;
+                  cursor:pointer;
                   span{
                     position:absolute;
                     top:-10px;
                     right:10px;
-                    color:red;
                     width:20px;
                     height:20px;
-                    line-height:20px;
-                    text-align:center;
                     border:1px solid red;
+                    line-height:20px;
+                    color:red;
+                    text-align:center;
                     border-radius:50%;
                   }
                   .icon{
@@ -373,25 +375,25 @@ export default {
           }
       }
       .tool{
+          .flexColumnCenter();
           width:95%;
-          border-radius:15px;
           margin:0 auto;
           background-color:#fff;
-          .flexColumnCenter();
+          border-radius:15px;
           .tool-text{
-              border-bottom:1px solid #eee;
-              width:100%;
               .flexRowCenter();
               justify-content:space-between;
+              width:100%;
+              border-bottom:1px solid #eee;
           }
           .tool-detail{
-              width:100%;
               .flexRowCenter();
               flex-wrap:wrap;
+              width:100%;
               div{
-                  margin:20px 0;
-                  width:25%;
                   .flexColumnCenter();
+                  width:25%;
+                  margin:20px 0;
                   .icon{
                     font-size:30px;
                     font-weight:800;

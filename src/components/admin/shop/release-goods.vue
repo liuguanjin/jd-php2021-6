@@ -1,5 +1,6 @@
 <template>
 	<div class="release-goods">
+		<!-- 后台发布宝贝界面 -->
 		<!-- 商品列表界面头部显示 -->
 		<el-breadcrumb separator-class="el-icon-arrow-right">
 			<el-breadcrumb-item :to="{ path: '/shop' }">商城</el-breadcrumb-item>
@@ -36,6 +37,7 @@
 	    	prop="goods_name"
 	    	label="商品名称"
 	    	align="center"
+	    	class-name="goods_name"
 	    	>
 		    </el-table-column>
 		    <el-table-column
@@ -719,7 +721,6 @@
 					value:'id',
 					label:'cate_name',
 					lazyLoad:(node,resolve)=>{
-						//console.log(node);
 						const { level} = node;
 						if (level == 1 || level == 2) {
 							const { data } = node;
@@ -732,7 +733,6 @@
 									id:item.id,
 									leaf:level >= 2,
 								}))
-								//console.log(res);
 								resolve(res);
 							})
 						}
@@ -984,14 +984,12 @@
 	      		this.addGoodsData.attr[index].id=id;
 	      		this.addGoodsData.attr[index].attr_name=name;
 	      		this.addGoodsData.attr[index].attr_value=e;
-	      		//console.log(this.addGoodsData.attr);
 	      	},
 	      	updateAttrvalueChange(e,index,id,name){
 	      		this.updateGoodsData.attr.push({"id":"","attr_name":"","attr_value":""});
 	      		this.updateGoodsData.attr[index].id=id;
 	      		this.updateGoodsData.attr[index].attr_name=name;
 	      		this.updateGoodsData.attr[index].attr_value=e;
-	      		//console.log(this.updateGoodsData.attr);
 	      	},
 	      	//当规格值下拉列表收起时清空specvalue
 	      	isGetSpecvalue(flag,id){
@@ -1014,7 +1012,6 @@
 	      	},
 	      	//规格值下拉列表发生改变时的逻辑
 	      	specvalueChange(e,index,index1,name){
-	      		//console.log(e);
 	      		if (e !== "") {
 		      		this.spec_goods = this.specvalueList.find(item=>item.id ==e);
 		      		var value = this.spec_goods.spec_value;
@@ -1080,12 +1077,10 @@
 			      			}
 	  					}
 		      		}
-		      		// console.log(this.addGoodsData);
 	      		}
 	      	},
 	      	//规格值下拉列表发生改变时的逻辑
 	      	updateSpecvalueChange(e,index,index1,name){
-	      		//console.log(e);
 	      		if (e !== "") {
 		      		this.spec_goods = this.specvalueList.find(item=>item.id ==e);
 		      		var value = this.spec_goods.spec_value;
@@ -1151,7 +1146,6 @@
 			      			}
 	  					}
 		      		}
-		      		// console.log(this.updateGoodsData);
 	      		}
 	      	},
 	      	//点击规格商品中的删除图标后的逻辑 splice删除item中的该项
@@ -1225,7 +1219,6 @@
 						this.update_cate_name = id_arr;
 			      		this.getSpecList(data.type_id);
 			      		this.getAttrList(data.type_id);
-						console.log(this.update_cate_name);
 					}else{
 						this.$message({message:msg,type:'warning'});
 					}
@@ -1241,12 +1234,32 @@
 		margin-bottom:10px;
 	}
 	.search{
-		margin-top:10px;
 		display:flex;
 		flex-direction:row;
+		margin-top:10px;
 	}
 	.el-table{
 		margin-top:10px;
+		/deep/ td.goods_name{
+			.cell{
+				display:block;
+				display:-webkit-box;
+				over-flow:hidden;
+				height:69px;
+				line-height:23px;
+				-webkit-line-clamp:3;
+				-webkit-box-orient:vertical;
+				text-overflow:ellipsis;
+			}
+		}
+		/deep/ td.goods_name:hover{
+			.cell{
+				display:block;
+				over-flow:visible;
+				height:100%;
+				cursor: pointer;
+			}
+		}
 	}
 	.el-dialog{
 		.el-button{

@@ -1,6 +1,6 @@
 <template>
 	<div class="advertisement_manager">
-		
+		这里是广告管理界面
 	</div>
 </template>
 

@@ -84,9 +84,9 @@ export default {
 	.footprint{
 		.head{
 			.flexRowCenter();
-			background-color:#eee;
 			justify-content:flex-start;
 			height:44px;
+			background-color:#eee;
 			line-height:44px;
 			p{
 				margin:0 auto;
@@ -105,19 +105,19 @@ export default {
 					.flexRowCenter();
 					flex-wrap:wrap;
 					div.goods:hover{
-						cursor:pointer;
 						color:pink;
+						cursor:pointer;
 					}
 					.goods{
-						margin:0 5px;
 						width:30%;
+						margin:0 5px;
 						img{
 							width:100%;
 						}
 						.price{
-							padding:0;
 							margin:0;
 							margin-top:5px;
+							padding:0;
 							color:@mallColor;
 						}
 					}

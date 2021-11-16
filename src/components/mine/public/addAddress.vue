@@ -1,6 +1,6 @@
 <template>
 	<div class="addAddress">
-		<div class="head">
+		<div class="header">
   			<i class="el-icon-back back" @click="back"></i>
       		<p class="head-center">添加收货地址</p>
   		</div>
@@ -103,11 +103,13 @@
 					address:"",
 					is_default:0,
 					sign:"",
+					goods_ids:[],
 				},
 				area:'',
 				isShowAddsign:false,
 				isSuccess:true,
 				provinceList:[],
+				fromBalance:false,
 				newsign:"",
 				chooseSignText:"",
 				sign:['家','公司','学校'],
@@ -116,7 +118,6 @@
 					value:'province_id',
 					label:'province_name',
 					lazyLoad:(node,resolve)=>{
-						//console.log(node);
 						const { level} = node;
 						const { data } = node;
 						if (level == 1){
@@ -131,7 +132,6 @@
 									city_id:item.city_id,
 									leaf:level >= 4,
 								}))
-								//console.log(res);
 								resolve(res);
 							})
 						} 
@@ -146,7 +146,6 @@
 									county_id:item.county_id,
 									leaf:level >= 4,
 								}))
-								//console.log(res);
 								resolve(res);
 							})
 						}
@@ -161,7 +160,6 @@
 									town_id:item.town_id,
 									leaf:level >= 4,
 								}))
-								//console.log(res);
 								resolve(res);
 							})
 						}
@@ -176,7 +174,6 @@
 									village_id:item.village_id,
 									leaf:level >= 4,
 								}))
-								//console.log(res);
 								resolve(res);
 							})
 						}
@@ -187,7 +184,6 @@
 		methods:{
 			addAddress(){
 				this.addAddressForm.sign = this.chooseSignText;
-				console.log(this.addAddressForm);
 				this.$homehttp({
 					url:'address',
 					method:'post',
@@ -225,7 +221,13 @@
 				})
 			},
 			back(){
-				this.$router.go(-1);
+				if (this.fromBalance) {
+					//跳转到选择收货地址界面
+					this.$router.push({name:'address',query:{id:this.addAddressForm.user_id,goods_ids:this.goods_ids,fromBalance:true}});
+				}else{
+					//跳转到选择收货地址界面
+					this.$router.push({name:'address',query:{id:this.addAddressForm.user_id}});
+				}
 			},
 			addSuccess(){
 				this.isShowAddsign = false;
@@ -248,6 +250,10 @@
 			}
 		},
 		created(){
+			if (this.$route.query.fromBalance) {
+				this.fromBalance = true;
+				this.goods_ids = this.$route.query.goods_ids;
+			}
 			this.addAddressForm.user_id = this.$route.query.user_id;
 			this.getProvinceList();
 		},
@@ -261,31 +267,33 @@
 		align-items:center;
 		input{
 			margin-left:10px;
+			border:none;
 			font-size:16px;
 			outline:none;
-			border:none;
 		}
 		.gap{
 			width:90%;
 			margin:30px 0;
 		}
-		.head{
-			width:100%;
+		.header{
 		 	position: relative;
-	      	background-color:#eee;
+			width:100%;
 	      	height:44px;
+	      	background-color:#eee;
 	      	line-height:44px;
 	      	.back{
 	      		position:absolute;
 	      		left:20px;
 	      		height:44px;
-	    		line-height:44px;
 	    		font-size:20px;
+	    		line-height:44px;
+		        cursor: pointer;
 	      	}
 	  	 	.head-center{
-		        text-align:center;
-		        font-weight:bold;
 		        margin:0;
+		        font-weight:bold;
+		        text-align:center;
+		        cursor: pointer;
 	  		}
 		}
 		.input-box{
@@ -306,14 +314,14 @@
 			}
 			.sign-span{
 				display:inline-block;
+				overflow: hidden;
 				width:40px;
 				height:40px;
+				border:1px solid black;
+				background-color:#eee;
 				line-height:40px;
 				text-align:center;
 				border-radius:15px;
-				border:1px solid black;
-				background-color:#eee;
-				overflow: hidden;
 			}
 			.more-sign{
 				margin-left:10px;
@@ -334,14 +342,14 @@
 			.addsuccess{
 				span{
 					display:inline-block;
+					overflow: hidden;
 					width:40px;
 					height:40px;
+					border:1px solid black;
 					line-height:40px;
 					text-align:center;
 					border-radius:15px;
-					border:1px solid black;
 					background-color:#eee;
-					overflow: hidden;
 				}
 			}
 			.addsuccess::after{
@@ -377,23 +385,23 @@
 			}
 		}
 		.add-sign{
-			margin:0 auto;
-			max-width:800px;
-			width:100%;
-			height:100%;
 			position:fixed;
+			right:0;
 			bottom:0;
 			left:0;
-			right:0;
-			background-color:rgba(0,0,0,0.7);
 			z-index:100;
+			width:100%;
+			max-width:800px;
+			height:100%;
+			margin:0 auto;
+			background-color:rgba(0,0,0,0.7);
 			transition:all 1s;
 			.add-sign-bottom{
 				position:absolute;
 				bottom:0;
-				width:100%;
 				display:flex;
 				flex-direction:column;
+				width:100%;
 				background-color:#fff;
 				.add-header{
 					width:100%;
@@ -411,32 +419,32 @@
 					}
 					span{
 						display:inline-block;
+						overflow: hidden;
 						width:20px;
 						height:20px;
 						line-height:20px;
 						text-align:center;
-						overflow: hidden;
 						color:red;
 					}
 					.newsign-span{
+						width:40px;
+						height:40px;
 						border-radius:50%;
 						border:1px solid black;
 						background-color:#eee;
-						color:black;
-						width:40px;
-						height:40px;
 						line-height:40px;
+						color:black;
 					}
 				}
 				.add-defaultsign{
 					margin:10px 0;
+					padding-bottom:5px;
 					border-bottom:1px solid #eee;
 					text-align:center;
-					padding-bottom:5px;
 				}
 				.el-button{
-					border-radius:10px;
 					margin:10px 0;
+					border-radius:10px;
 				}
 			}
 		}

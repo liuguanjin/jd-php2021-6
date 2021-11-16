@@ -1,6 +1,6 @@
 <template>
 	<div class="vip_grade">
-		
+		这里是会员等级界面
 	</div>
 </template>
 

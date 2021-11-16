@@ -1,6 +1,6 @@
 <template>
 	<!-- 后台首页 -->
-	<div id="admin">
+	<div class="admin">
 		<el-container>
 			<!-- 后台头部 -->
 			<el-header>
@@ -24,7 +24,7 @@
 						<el-dropdown>
 							<span>
 								<el-row>
-									<el-col :span="18">
+									<el-col :span="18" class="nickname">
 										{{adminInfo.nickname||'暂未设置昵称'}}
 									</el-col>
 									<el-col :span="6">
@@ -34,7 +34,7 @@
 							</span>
 							<el-dropdown-menu>
 								<el-dropdown-item>
-									个人信息
+									<span @click="home">前台</span>
 								</el-dropdown-item>
 								<el-dropdown-item>
 									<span @click="logout">退出</span>
@@ -73,6 +73,7 @@
 		},
 		methods:{
 			logout(){
+				//后台用户退出
 				this.$http({
 					url:"adminLogout"
 				}).then(result=>{
@@ -81,40 +82,46 @@
 						this.$router.push({path:'adminLogin'});
 					}
 				})
-			}
+			},
+			home(){
+				this.$router.push('/home');
+			},
 		}
 	}
 </script>
 
 <style lang="less" scoped>
+	.nickname{
+		cursor: pointer;
+	}
 	.el-header{
 		padding:0;
 	}
 	.el-main{
-		background-color:white;
 		height:800px;
 		padding:0;
+		background-color:white;
 		div{
 			height:100%;
 		}
 	}
 	.el-footer{
-		padding:0;
-		width:100px !important;
-		height:100px !important;
 		position:fixed;
 		right:0;
 		bottom:0;
+		width:100px !important;
+		height:100px !important;
+		padding:0;
 		span{
 			display:block;
 			width:100%;
 			height:100px;
 			line-height:100px;
-			opacity:0.5;
 			background-color:rgb(84, 92, 100);
-			border-radius:50%;
-			color:red;
 			text-align:center;
+			color:red;
+			opacity:0.5;
+			border-radius:50%;
 		}
 	}
 	.el-col-4 {

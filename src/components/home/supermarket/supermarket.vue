@@ -150,28 +150,28 @@ export default {
 	.supermarket{
 		background-color:#eee;
 		.header{
-			background-color:#fff;
 			.flexRowCenter();
 			justify-content:space-between;
+			background-color:#fff;
 			.back{
-				margin-left:10px;
 				height:44px;
+				margin-left:10px;
 				line-height:44px;
 			}
 			.title{
 				height:44px;
-				line-height:44px;
 				margin:0 70px;
-				text-align:center;
 				font-size:16px;
+				line-height:44px;
+				text-align:center;
 				color:#333;
 			}
 			.more{
-				font-size:16px;
 				height:44px;
+				margin-right:10px;
+				font-size:16px;
 				line-height:44px;
 				text-align:center;
-				margin-right:10px;
 			}
 		}
 		.carousel{
@@ -182,18 +182,18 @@ export default {
 			}
 		}
 		.classify{
-			background-color:#fff;
-			margin-top:10px;
 			.flexRowCenter();
 			justify-content:space-between;
 			flex-wrap:wrap;
+			margin-top:10px;
+			background-color:#fff;
 			.classify-item{
 				.flexColumnCenter();
 				width:20%;
 				margin-bottom:10px;
 				img{
-					margin-bottom:3px;
 					width:80%;
+					margin-bottom:3px;
 				}
 				span{
 					font-size:10px;
@@ -203,8 +203,8 @@ export default {
 		}
 		.qianggou{
 			margin-top:10px;
-			background-color:#fff;
 			padding-left:15px;
+			background-color:#fff;
 			.head{
 				span:nth-child(1){
 					font-size:18px;
@@ -220,25 +220,25 @@ export default {
 			.time{
 				margin:10px 0; 
 				span{
-					background-color:#eee;
-					border-radius:20px;
 					padding:3px 20px;
+					border-radius:20px;
+					background-color:#eee;
 				}
 				.active{
-					color:white;
 					background-color:#FFA07F;
+					color:white;
 				}
 			}
 			.qianggou-shop{
 				position:relative;
+				overflow:hidden;
 				width:100%;
 				height:200px;
-				overflow:hidden;
 				.qianggou-item{
 					position:absolute;
 					top:0;
-					width:100%;
 					.flexRowCenter();
+					width:100%;
 					transition: all 0.1s;
 					.item{
 						width:35%;
@@ -246,8 +246,8 @@ export default {
 							width:100%;
 						}
 						.title{
-							width:100%;
 							overflow:hidden;
+							width:100%;
 							text-overflow:ellipsis;
 							white-space:nowrap;
 						}

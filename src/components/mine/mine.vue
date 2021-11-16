@@ -1,7 +1,7 @@
 <template>
   <div class="mine">
     <!-- 个人中心头部 -->
-  	<div class="mine-title">
+  	<div class="header">
       <i class="el-icon-back back" @click="back"></i>
       <p>您需要登录才能继续访问</p>
     </div>
@@ -32,23 +32,23 @@ export default {
   @import url("../less/common.less");
   .mine{
     margin-bottom:60px;
-    .mine-title{
+    .header{
       position: relative;
-      background-color:#eee;
       height:44px;
+      background-color:#eee;
       line-height:44px;
       p{
-        text-align:center;
-        font-weight:bold;
         margin:0;
+        font-weight:bold;
+        text-align:center;
       }
       .back{
         position:absolute;
-        margin-left:10px;
         left:10px;
         height:44px;
-        line-height:44px;
+        margin-left:10px;
         font-size:20px;
+        line-height:44px;
       }
     }
   }

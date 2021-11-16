@@ -1,6 +1,6 @@
 <template>
 	<div class="shop_recycle">
-		
+		这里是回收站界面
 	</div>
 </template>
 

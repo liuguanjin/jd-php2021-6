@@ -1,5 +1,6 @@
 <template>
 	<div class="shop_brand">
+		<!-- 后台商品品牌界面 -->
 		<!-- 商品品牌界面头部显示 -->
 		<el-breadcrumb separator-class="el-icon-arrow-right">
 			<el-breadcrumb-item :to="{ path: '/shop' }">商城</el-breadcrumb-item>
@@ -335,7 +336,6 @@
 					value:'id',
 					label:'cate_name',
 					lazyLoad:(node,resolve)=>{
-						//console.log(node);
 						const { level} = node;
 						if (level == 1 || level == 2) {
 							const { data } = node;
@@ -348,7 +348,6 @@
 									id:item.id,
 									leaf:level >= 2,
 								}))
-								//console.log(res);
 								resolve(res);
 							})
 						}
@@ -359,7 +358,6 @@
 					value:'id',
 					label:'cate_name',
 					lazyLoad:(node,resolve)=>{
-						//console.log(node);
 						const { level} = node;
 						if (level == 1 || level == 2) {
 							const { data } = node;
@@ -372,7 +370,6 @@
 									id:item.id,
 									leaf:level >= 2,
 								}))
-								//console.log(res);
 								resolve(res);
 							})
 						}
@@ -541,9 +538,9 @@
 		margin-bottom:10px;
 	}
 	.search{
-		margin-top:10px;
 		display:flex;
 		flex-direction:row;
+		margin-top:10px;
 	}
 	.el-pagination{
 		display:flex;

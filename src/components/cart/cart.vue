@@ -23,6 +23,8 @@ export default {
 	.cart{
 		height:100%;
 		background-color:#eee;
-
+    .recommend-goods{
+      margin-bottom:120px;
+    }
 	}
 </style>

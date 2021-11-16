@@ -1,6 +1,6 @@
 <template>
 	<div class="edit-address">
-		<div class="head">
+		<div class="header">
   			<i class="el-icon-back back" @click="back"></i>
       		<p class="head-center">编辑收货地址</p>
   		</div>
@@ -112,12 +112,13 @@
 				isShowAddsign:false,
 				isSuccess:true,
 				id:'',
+				fromBalance:false,
+				goods_ids:[],
 				areaProp:{
 					lazy:true,
 					value:'province_id',
 					label:'province_name',
 					lazyLoad:(node,resolve)=>{
-						//console.log(node);
 						const { level} = node;
 						const { data } = node;
 						if (level == 1){
@@ -132,7 +133,6 @@
 									city_id:item.city_id,
 									leaf:level >= 4,
 								}))
-								//console.log(res);
 								resolve(res);
 							})
 						} 
@@ -147,7 +147,6 @@
 									county_id:item.county_id,
 									leaf:level >= 4,
 								}))
-								//console.log(res);
 								resolve(res);
 							})
 						}
@@ -162,7 +161,6 @@
 									town_id:item.town_id,
 									leaf:level >= 4,
 								}))
-								//console.log(res);
 								resolve(res);
 							})
 						}
@@ -177,7 +175,6 @@
 									village_id:item.village_id,
 									leaf:level >= 4,
 								}))
-								//console.log(res);
 								resolve(res);
 							})
 						}
@@ -187,7 +184,13 @@
 		},
 		methods:{
 			back(){
-				this.$router.go(-1);
+				if (this.fromBalance) {
+					//跳转到选择收货地址界面
+					this.$router.push({name:'address',query:{id:this.editAddressForm.user_id,goods_ids:this.goods_ids,fromBalance:true}});
+				}else{
+					//跳转到选择收货地址界面
+					this.$router.push({name:'address',query:{id:this.editAddressForm.user_id}});
+				}
 			},
 			areaChange(e){
 				this.editAddressForm.province = e[0];
@@ -255,7 +258,6 @@
 				}else{
 					this.editAddressForm.is_default = 0;
 				}
-				console.log(this.editAddressForm);
 				this.$homehttp({
 					url:'address/'+this.id,
 					method:'put',
@@ -272,6 +274,10 @@
 			},
 		},
 		created(){
+			if (this.$route.query.fromBalance) {
+				this.fromBalance = true;
+				this.goods_ids = this.$route.query.goods_ids;
+			}
 			this.editAddressForm.user_id = this.$route.query.user_id;
 			this.id = this.$route.query.id;
 			this.getEditAddress();
@@ -295,7 +301,7 @@
 			width:90%;
 			margin:30px 0;
 		}
-		.head{
+		.header{
 			width:100%;
 		 	position: relative;
 	      	background-color:#eee;
@@ -307,6 +313,7 @@
 	      		height:44px;
 	    		line-height:44px;
 	    		font-size:20px;
+	    		cursor: pointer;
 	      	}
 	  	 	.head-center{
 		        text-align:center;
@@ -404,23 +411,23 @@
 			}
 		}
 		.add-sign{
-			margin:0 auto;
-			max-width:800px;
-			width:100%;
-			height:100%;
 			position:fixed;
+			right:0;
 			bottom:0;
 			left:0;
-			right:0;
-			background-color:rgba(0,0,0,0.7);
 			z-index:100;
+			width:100%;
+			max-width:800px;
+			height:100%;
+			margin:0 auto;
+			background-color:rgba(0,0,0,0.7);
 			transition:all 1s;
 			.add-sign-bottom{
 				position:absolute;
 				bottom:0;
-				width:100%;
 				display:flex;
 				flex-direction:column;
+				width:100%;
 				background-color:#fff;
 				.add-header{
 					width:100%;
@@ -438,32 +445,32 @@
 					}
 					span{
 						display:inline-block;
+						overflow: hidden;
 						width:20px;
 						height:20px;
 						line-height:20px;
-						text-align:center;
-						overflow: hidden;
 						color:red;
+						text-align:center;
 					}
 					.newsign-span{
-						border-radius:50%;
-						border:1px solid black;
-						background-color:#eee;
-						color:black;
 						width:40px;
 						height:40px;
+						border:1px solid black;
+						border-radius:50%;
+						background-color:#eee;
 						line-height:40px;
+						color:black;
 					}
 				}
 				.add-defaultsign{
 					margin:10px 0;
+					padding-bottom:5px;
 					border-bottom:1px solid #eee;
 					text-align:center;
-					padding-bottom:5px;
 				}
 				.el-button{
-					border-radius:10px;
 					margin:10px 0;
+					border-radius:10px;
 				}
 			}
 		}

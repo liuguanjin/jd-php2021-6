@@ -8,13 +8,12 @@
   	v-for="(item,index) in categoryDetailArr"
   	:key="index"
   	class="shop-classify" 
-  	@click="toDetail(item.id)"
   	>
-  		<img :src="'http://www.liuguanjin.top:8101'+item.goods_logo" alt="">
+  		<img :src="'http://www.liuguanjin.top:8101'+item.goods_logo" alt="" @click="toDetail(item.id)">
   		<div class="shop-text">
-  			<p class="shop-title">{{item.goods_name}}</p>
+  			<p class="shop-title" @click="toDetail(item.id)">{{item.goods_name}}</p>
   			<p class="shop-price">￥{{item.goods_price}}</p>
-  			<p class="shop-name">{{item.shop.shop_name}}</p>
+  			<p class="shop-name" @click="enterShopDetail(item.shop.id)">{{item.shop.shop_name}}</p>
   		</div>
   	</div>
   </div>
@@ -44,6 +43,9 @@ export default {
 		toDetail(id){
 			this.$router.push({name:"detail",query:{id:id}});
 		},
+		enterShopDetail(id){
+ 			this.$router.push({name:"shopDetail",query:{id:id}});
+ 		},
 		getCategoryDetailArr(){
 			this.$homehttp({
 				url:'category-detail/'+this.id
@@ -63,40 +65,43 @@ export default {
 <style lang="less" scoped>
 @import url("../less/common.less");
 	.classify-detail{
-		background-color:#eee;
 		padding-bottom:10px;
+		background-color:#eee;
 		.shop-classify{
+			.flexRowCenter();
 			width:95%;
 			margin:0 auto;
 			margin-top:10px;
-			background-color:#fff;
 			padding:10px 0;
 			border-radius:15px;
-			.flexRowCenter();
+			background-color:#fff;
 			img{
-				margin-left:5px;
 				height:100px;
+				margin-left:5px;
+				cursor: pointer;
 			}
 			.shop-text{
-				margin-left:5px;
 				.flexColumnCenter();
 				align-items:flex-start;
+				margin-left:5px;
 				p{
 					margin:3px 0;
 					padding:0;
 				}
 				.shop-title{
+					overflow:hidden;
 					height:30px;
 					line-height:15px;
-					overflow:hidden;
+					cursor: pointer;
 				}
 				.shop-price{
 					color:#E93B75;
 					font-size:18px;
 				}
 				.shop-name{
-					color:gray;
 					font-size:8px;
+					color:gray;
+					cursor: pointer;
 				}
 			}
 		}

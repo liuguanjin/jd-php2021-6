@@ -4,18 +4,18 @@
   			<i class="el-icon-back back" @click="back"></i>
       		<p>设置</p>
   		</div>
-  		<div class="avatar" @click="toMyMessage">
+  		<div class="avatar cursor" @click="toMyMessage">
   			<div>
 	  			<img :src="userDetail.avatar?'http://www.liuguanjin.top:8101'+userDetail.avatar:''" alt="我的头像">
 	  			<p>{{userDetail.nickname}}</p>
   			</div>
 			<p class="enter">></p>
   		</div>
-  		<div class="address" @click="toAddress">
+  		<div class="address cursor" @click="toAddress">
   			<p>我的收货地址</p>
 			<p class="enter">></p>
   		</div>
-  		<div class="user" @click="toMyAccount">
+  		<div class="user cursor" @click="toMyAccount">
   			<p>账户与安全</p>
   			<p class="enter">></p>
   		</div>
@@ -131,11 +131,14 @@ export default {
 		height:1024px;
 		background-color:#eee;
 		div{
-			background-color:#fff;
 			.flexRowCenter();
 			justify-content:space-between;
 			margin-bottom:1px;
 			padding:0 10px;
+			background-color:#fff;
+		}
+		.cursor{
+			cursor: pointer;
 		}
 		.avatar{
 			img{
@@ -146,29 +149,31 @@ export default {
 		}
 		.head{
 			position: relative;
-	      	background-color:#eee;
-	      	height:44px;
-	      	line-height:44px;
 	      	display:inherit;
+	      	height:44px;
+	      	background-color:#eee;
+	      	line-height:44px;
 	      	.back{
 	      		position:absolute;
 	      		left:20px;
 	      		height:44px;
-        		line-height:44px;
         		font-size:20px;
+        		line-height:44px;
+        		cursor: pointer;
 	      	}
       	 	p{
-		        text-align:center;
-		        font-weight:bold;
 		        margin:0;
+		        font-weight:bold;
+		        text-align:center;
       		}
 		}
 		.showleave{
-			width:100%;
 			position:fixed;
 			bottom:56px;
+			width:100%;
 			max-width:800px;
 			background-color:#FF5C00;
+			cursor: pointer;
 			p{
 				margin:10px auto;
 				color:white;
@@ -181,34 +186,35 @@ export default {
 			margin-bottom:5px;
 		}
 		.leave{
-			margin:10px auto;
-			width:30%;
 			.flexColumnCenter();
+			width:30%;
+			margin:10px auto;
 			.leave-text{
 				width:100%;
 				padding:10px;
-				color:#d1d1d1;
 				border-bottom:1px solid #eee;
+				color:#d1d1d1;
 				p{
 					margin:0 auto;
 				}
 			}
 			.leave-confim{
-				width:100%;
-				padding:10px;
 				.flexRowCenter();
 				justify-content:space-between;
+				width:100%;
+				padding:10px;
 				p{
-					padding:10px;
 					margin:0;
+					padding:10px;
 					border:1px solid red;
 					border-radius:10px;
 				}
 				.sure{
 					color:red;
+					cursor: pointer;
 				}
 				.cansel{
-					
+					cursor: pointer;
 				}
 			}
 		}

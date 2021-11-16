@@ -22,7 +22,6 @@ homeaxios.install = function(vue){
 		}else if(conf.url == 'captcha'){
 			delete conf.headers.Authorization
 		}
-		//console.log(conf);
 		//将拦截器的操作返回给axios对象
 		return conf;
 	})

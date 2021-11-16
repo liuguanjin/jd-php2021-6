@@ -1,5 +1,6 @@
 <template>
 	<div class="sold-goods">
+		<!-- 后台已卖出的宝贝界面 -->
 		<!-- 已售出商品界面头部显示 -->
 		<el-breadcrumb separator-class="el-icon-arrow-right">
 			<el-breadcrumb-item :to="{ path: '/shop' }">商城</el-breadcrumb-item>
@@ -27,6 +28,7 @@
 	    	prop="goods_name"
 	    	label="商品名称"
 	    	align="center"
+	    	class-name="goods_name"
 	    	>
 		    </el-table-column>
 		    <el-table-column
@@ -83,6 +85,14 @@
 		      	</template>
 		    </el-table-column>
 	  	</el-table>
+	  	<!-- 分页 -->
+	  	<el-pagination
+	    layout="prev, pager, next"
+	    :total="total"
+	    :page-size.sync="perPage"
+	    @current-change="currentChange"
+	    >
+	  	</el-pagination>
 	</div>
 </template>
 
@@ -92,6 +102,9 @@
 			return {
 				keyword:"",
 				soldGoodsList:[],
+				total:0,
+				perPage:10,
+				currentPage:1,
 			}
 		},
 		methods:{
@@ -99,15 +112,22 @@
 				var admininfo = localStorage.getItem('admininfo');
 				var admin_id = JSON.parse(admininfo).admin_id;
 				this.$http({
-					url:'soldgoods?admin_id='+admin_id+'&keyword='+keyword
+					url:'soldgoods?admin_id='+admin_id+'&keyword='+keyword+'&page='+this.currentPage
 				}).then(result=>{
 					const {code,msg,data} = result.data;
 					if (code == 200) {
-						this.soldGoodsList = data;
+						this.soldGoodsList = data.data;
+						this.tatal = data.tatal;
+						this.perPage = data.per_page;
 					}else{
 						this.$message({message:msg,type:'warning'});
 					}
 				})
+			},
+			//改变分页页数 使当前页为点击页 重新渲染界面
+			currentChange(c){
+				this.currentPage = c;
+				this.getSoldGoods();
 			},
 		},
 		created(){
@@ -118,9 +138,9 @@
 
 <style lang="less" scoped>
 	.search{
-		margin-top:10px;
 		display:flex;
 		flex-direction:row;
+		margin-top:10px;
 	}
 	.el-dialog{
 		.el-button{
@@ -135,6 +155,26 @@
 		}
 		.remind{
 			color:red;
+		}
+		/deep/ td.goods_name{
+			.cell{
+				display:block;
+				display:-webkit-box;
+				over-flow:hidden;
+				height:69px;
+				line-height:23px;
+				-webkit-line-clamp:3;
+				-webkit-box-orient:vertical;
+				text-overflow:ellipsis;
+			}
+		}
+		/deep/ td.goods_name:hover{
+			.cell{
+				display:block;
+				over-flow:visible;
+				height:100%;
+				cursor: pointer;
+			}
 		}
 	}
 </style>

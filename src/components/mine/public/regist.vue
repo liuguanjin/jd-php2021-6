@@ -1,7 +1,7 @@
 <template>
-  <div id="regist-main">
+  <div class="regist">
   	<!-- 注册界面头部 -->
-  	<div class="regist-title">
+  	<div class="header">
   		<i class="el-icon-back back" @click="back"></i>
   		<p>注册</p>
   	</div>
@@ -24,18 +24,13 @@
 		    <el-input placeholder="请确认您的密码" @blur="leaveReUpwd" show-password v-model="reUpwd">
 		    </el-input>
 	  	</el-form-item>
-	  	<el-form-item label="验证码">
+	  	<el-form-item label="验证码" class="verify">
 		    <el-input placeholder="请输入验证码" v-model="registerForm.code">
 		    </el-input>
-		    <span class="ver-code" @click="generateVerify"><img :src="verify.src" alt="正在加载"></span>
-	  	</el-form-item>
+		    <span class="ver-code" @click="generateVerify"><img :src="verify.src.indexOf('/')===0?'http://www.liuguanjin.top:8101'+verify.src:verify.src" alt="正在加载"></span>
+		    <el-button type="warning" @click="regist">注册</el-button>
 	  	</el-form-item>
 	</el-form>
-  	<!-- 注册按钮 -->
-  	<div class="button">
-	    <el-button type="warning" @click="regist">注册</el-button>
-	</div>
-  	
   </div>
 </template>
 
@@ -49,7 +44,6 @@ export default {
  		return {
  			uanmePrompt:"",
  			show:false,
- 			verify:"",
  			reUpwd:"",
  			isAllowRegist:false,
  			registerForm:{
@@ -57,6 +51,7 @@ export default {
  				password:"",
  				code:"",
  			},
+ 			verify:{src:'',uniqid:0},
  		}
  	},
  	created(){
@@ -210,72 +205,78 @@ export default {
 
 <style lang="less" scoped>
 	@import url("../../less/common.less");
-	#regist-main{
+	.regist{
 		display:flex;
 		flex-direction:column;
 		justify-content:center;
 		align-items:center;
 		width:100%;
-		.regist-title{
-			width:100%;
+		p{
+			margin:0;
+			paddding:0;
+		}
+		.header{
 			position: relative;
-			background-color:#eee;
+			width:100%;
 			height:44px;
+			background-color:#eee;
 			line-height:44px;
-			.back{
-				position:absolute;
-				margin-left:10px;
+		    p{
+			 	margin:0;
+		        text-align:center;
+			 	font-weight:bold;
+		    }
+		    .back{
+		    	position:absolute;
 				left:10px;
 				height:44px;
-				line-height:44px;
+				margin-left:10px;
 				font-size:20px;
-			}
-			p{
-				text-align:center;
-			 	font-weight:bold;
-			 	margin:0;
-			}
+				line-height:44px;
+				cursor: pointer;
+		    }
 		}
 		.logo{
-			width:100%;
 			.flexRowCenter();
 			justify-content:center;
+			width:100%;
+			margin-top:20px;
 			img{
 				width:100px;
 				height:100px;
 				border-radius:50%;
 			}
 		}
+		.prompt-show{
+			color:red;
+		}
 		.el-form{
 			width:100%;
+			.verify{
+				/deep/ .el-form-item__content{
+					display:flex;
+					flex-direction:row;
+					align-items:center;
+				}
+			}
 			/deep/ .el-form-item{
 				.flexRowCenter();
+				.el-form-item__content{
+					margin-left:10px !important;
+				}
 				.el-input{
 					margin:20px 0;
 				}
 				span{
-					margin-left:10px;
 					height:40px;
+					margin-left:10px;
 					img{
 						height:40px;
 					}
 				}
-				/deep/ .el-form-item__content{
-					margin-left:0 !important;
-					.flexRowCenter();
-					p{
-						paddding:0;
-						margin:0;
-						margin-left:15px;
-						color:red;
-					}
+				.el-button{
+					margin-left:10px;
 				}
-			}
-		}
-		.button{
-			width:65%;
-			.el-button{
-				width:100%;
 			}
 		}
 	}

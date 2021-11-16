@@ -1,5 +1,6 @@
 <template>
 	<div class="store_list">
+		<!-- 后台店铺列表界面 -->
 		<!-- 店铺列表界面头部显示 -->
 		<el-breadcrumb separator-class="el-icon-arrow-right">
 			<el-breadcrumb-item :to="{ path: '/shop' }">商城</el-breadcrumb-item>
@@ -74,6 +75,14 @@
 	    		</template>
 		    </el-table-column>
 	    </el-table>
+	    <!-- 分页 -->
+	  	<el-pagination
+	    layout="prev, pager, next"
+	    :total="total"
+	    :page-size.sync="perPage"
+	    @current-change="currentChange"
+	    >
+	  	</el-pagination>
 	    <!-- 添加店铺会话 -->
 	  	<el-dialog 
 	  	title="添加店铺" 
@@ -246,6 +255,9 @@ export default {
 			keyword:"",
 			isShowAddStore:false,
 			isShowUpdateStore:false,
+			currentPage:1,
+			total:1,
+			perPage:10,
 			storeList:[],
 			addStoreData:{
 				shop_name:"",
@@ -281,11 +293,18 @@ export default {
 			}).then(result=>{
 				const {code,msg,data} = result.data;
 				if (code == 200) {
-					this.storeList = data;
+					this.storeList = data.data;
+					this.total = data.total;
+					this.perPage = data.per_page;
 				}else{
 					this.$message({message:msg,type:'warning'});
 				}
 			})
+		},
+		//改变分页页数 使当前页为点击页 重新渲染界面
+		currentChange(c){
+			this.currentPage = c;
+			this.getStoresList();
 		},
 		getAdminList(){
 			this.$http({
@@ -405,9 +424,9 @@ export default {
 		margin-bottom:10px;
 	}
 	.search{
-		margin-top:10px;
 		display:flex;
 		flex-direction:row;
+		margin-top:10px;
 	}
 	.el-dialog{
 		.el-button{

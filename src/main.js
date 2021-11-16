@@ -13,6 +13,9 @@ import myaxios from "@/assets/js/myaxios.js";
 //引入前台homeaxios插件
 import homeaxios from "@/assets/js/homeaxios.js";
 import '../style/iconfont.css';
+//引入echarts组件
+import * as echarts from 'echarts';
+Vue.prototype.$echarts = echarts;
 //注册myaxios插件
 Vue.use(myaxios);
 //注册homeaxios插件

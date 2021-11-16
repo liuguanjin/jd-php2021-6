@@ -1,5 +1,6 @@
 <template>
 	<div class="role_manager">
+		<!-- 后台角色管理界面 -->
 		<!-- 角色管理界面头部显示 -->
 		<el-breadcrumb separator-class="el-icon-arrow-right">
 			<el-breadcrumb-item :to="{ path: '/platform' }">平台</el-breadcrumb-item>
@@ -274,21 +275,17 @@ export default {
 		},
 		//添加角色会话中选中权限发生变化时
 		getAuth(list){
-			//console.log(list);
 			//数组加入另一个数组中的元素
 			this.haveAuths = this.haveAuths.concat(list[list.length-1]);
 			//数组去重
 			this.haveAuths = Array.from(new Set(this.haveAuths));
-			//console.log(this.haveAuths);
 		},
 		//修改角色会话中选中权限发生变化时
 		editGetAuth(list){
-			//console.log(list);
 			//数组加入另一个数组中的元素
 			this.editHaveAuths = this.editHaveAuths.concat(list[list.length-1]);
 			//数组去重
 			this.editHaveAuths = Array.from(new Set(this.editHaveAuths));
-			//console.log(this.editHaveAuths);
 		},
 		//角色详情 发送请求
 		editRole(id){
@@ -336,9 +333,9 @@ export default {
 		margin-bottom:10px;
 	}
 	.search{
-		margin-top:10px;
 		display:flex;
 		flex-direction:row;
+		margin-top:10px;
 	}
 	.el-pagination{
 		display:flex;

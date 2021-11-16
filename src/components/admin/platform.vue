@@ -1,5 +1,6 @@
 <template>
 	<div class="platform">
+		<!-- 后台菜单平台选项 -->
 		<el-container>
 			<el-aside width="25%">
 				<el-menu
@@ -46,16 +47,16 @@
 <style lang="less" scoped>
 	.platform{
 		/deep/ .el-submenu__title{
-			padding-left:0 !important;
 			padding:0;
+			padding-left:0 !important;
 			.el-submenu__icon-arrow{
 				right:0;
 			}
 		}
 		/deep/ .el-menu-item{
-			padding-left:0 !important;
-			padding:0;
 			min-width:0;
+			padding:0;
+			padding-left:0 !important;
 			text-align:center;
 		}
 		.el-submenu [class^=el-icon-]{

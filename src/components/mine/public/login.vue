@@ -1,5 +1,5 @@
 <template>
-  <div id="mine-login">
+  <div class="main">
   	<!-- 登录界面logo -->
   	<div class="logo">
   		<img src="https://person-use.oss-cn-shenzhen.aliyuncs.com/images/cart-login/1.jpg" alt="">	
@@ -15,11 +15,10 @@
 		    <el-input placeholder="请输入您的密码" @blur="leaveInput" show-password v-model="loginForm.password">
 		    </el-input>
 	  	</el-form-item>
-	  	<el-form-item label="验证码">
+	  	<el-form-item label="验证码" class="verify">
 		    <el-input placeholder="请输入验证码" @blur="leaveInput" v-model="loginForm.code">
 		    </el-input>
-		    <span class="ver-code" @click="generateVerify"><img :src="verify.src.indexOf('/')===0?'http://www.liuguanjin.top:8101'+verify.src:verify.src" alt="正在加载"></span>
-	  	</el-form-item>
+		    <span class="verify-code" @click="generateVerify"><img :src="verify.src.indexOf('/')===0?'http://www.liuguanjin.top:8101'+verify.src:verify.src" alt="正在加载"></span>
 	  	</el-form-item>
 	</el-form>
 	<div class="button">
@@ -82,6 +81,7 @@ export default {
 				this.isAllowLogin = false;
  			}else{
  				this.show = false;
+ 				this.uanmePrompt = "";
 				this.isAllowLogin = true;
 			}
  		},
@@ -169,59 +169,66 @@ export default {
  	}
 }
 </script>
-
 <style lang="less" scoped>
 	@import url("../../less/common.less");
-	#mine-login{
+	.main{
 		display:flex;
 		flex-direction:column;
 		justify-content:center;
 		align-items:center;
 		width:100%;
+		p{
+			margin:0;
+			paddding:0;
+		}
 		.logo{
-			width:100%;
-			margin-top:20px;
 			.flexRowCenter();
 			justify-content:center;
+			width:100%;
+			margin-top:20px;
 			img{
 				width:100px;
 				height:100px;
 				border-radius:50%;
 			}
 		}
+		.prompt-show{
+			color:red;
+		}
+		
 		.el-form{
-			margin:30px 0;
-			width:70%;
-			.flexColumnCenter();
+			width:100%;
+			.verify{
+				/deep/ .el-form-item__content{
+					display:flex;
+					flex-direction:row;
+					align-items:center;
+				}
+			}
+
 			/deep/ .el-form-item{
-				width:100%;
 				display:flex;
 				flex-direction:row;
 				align-items:center;
-				margin:30px 0;
+				flex-wrap:nowrap;
+				.el-form-item__content{
+					margin-left:10px !important;
+				}
+				label{
+					text-align:right;
+				}
 				.el-input{
+					margin:20px 0;
 				}
 				span{
-					margin-left:20px;
 					height:40px;
+					margin-left:20px;
 					img{
 						height:40px;
 					}
 				}
-				.el-form-item__label{
-					text-align:left;
-				}
-				/deep/ .el-form-item__content{
-					margin-left:0 !important;
-					.flexRowCenter();
-					p{
-						paddding:0;
-						margin:0;
-						margin-left:20px;
-						color:red;
-					}
-				}
 			}
+
 		}
 		.button{
 			width:70%;
@@ -231,3 +238,4 @@ export default {
 		}
 	}
 </style>
+

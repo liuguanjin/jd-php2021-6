@@ -1,5 +1,6 @@
 <template>
 	<div class="shop_list">
+		<!-- 后台商品列表界面 -->
 		<!-- 商品列表界面头部显示 -->
 		<el-breadcrumb separator-class="el-icon-arrow-right">
 			<el-breadcrumb-item :to="{ path: '/shop' }">商城</el-breadcrumb-item>
@@ -41,6 +42,7 @@
 	    	prop="goods_name"
 	    	label="商品名称"
 	    	align="center"
+	    	class-name="long_column"
 	    	>
 		    </el-table-column>
 		    <el-table-column
@@ -51,6 +53,13 @@
 	    		<template slot-scope="scope">
 		    		<img :src="'http://www.liuguanjin.top:8101'+scope.row.goods_logo" alt="正在加载">
 		      	</template>
+		    </el-table-column>
+		    <el-table-column
+	    	prop="evaluate_keyword"
+	    	label="评论关键词"
+	    	align="center"
+	    	class-name="long_column"
+	    	>
 		    </el-table-column>
 		    <el-table-column
 	    	prop="goods_price"
@@ -176,7 +185,15 @@
 			      	>
 			      	</el-input>
 			    </el-form-item>
-			    
+			    <el-form-item 
+			    label="商品评论关键词" 
+			    >
+			      	<el-input 
+			      	v-model="addGoodsData.evaluate_keyword" 
+			      	autocomplete="off"
+			      	>
+			      	</el-input>
+			    </el-form-item>
 			    <el-form-item 
 			    label="所属分类" 
 			    >
@@ -279,7 +296,7 @@
                     list-type="picture"
                     :http-request="handleUpload"
                     :before-upload="beforeAvatarUpload"
-                    :on-remove="handleRemove"
+                    :on-remove="handleAddRemove"
                     :before-remove="beforeRemove"
                     :file-list="imagesList"
                     :on-success = 'addImagesSuccess'
@@ -454,7 +471,15 @@
 			      	>
 			      	</el-input>
 			    </el-form-item>
-			    
+			    <el-form-item 
+			    label="商品评论关键词" 
+			    >
+			      	<el-input 
+			      	v-model="updateGoodsData.evaluate_keyword" 
+			      	autocomplete="off"
+			      	>
+			      	</el-input>
+			    </el-form-item>
 			    <el-form-item 
 			    label="所属分类" 
 			    >
@@ -548,7 +573,11 @@
                 <el-form-item 
 			    label="商品相册" 
 			    >	
-
+			    	<img 
+			    	v-for="(item,index) in updateGoodsData.goods_images"
+			    	:src="'http://www.liuguanjin.top:8101/'+item.pics_sma" 
+			    	alt="修改成功后显示"
+			    	>
 			    	<el-upload
 			    	ref="updateUpload"
                     class="upload-demo"
@@ -560,7 +589,7 @@
                     list-type="picture"
                     :http-request="handleUpdateUpload"
                     :before-upload="beforeAvatarUpload"
-                    :on-remove="handleRemove"
+                    :on-remove="handleUpdateRemove"
                     :before-remove="beforeRemove"
                     :file-list="updateGoodsData.goods_image"
                     :on-success = 'addImagesSuccess'
@@ -702,6 +731,7 @@
 					goods_name:"",
 					goods_price:"",
 					goods_logo:"",
+					evaluate_keyword:"",
 					market_price:"",
 					cost_price:"",
 					goods_number:"",
@@ -719,6 +749,7 @@
 				updateGoodsData:{
 					goods_name:"",
 					goods_price:"",
+					evaluate_keyword:"",
 					goods_logo:"",
 					market_price:"",
 					cost_price:"",
@@ -767,7 +798,6 @@
 					value:'id',
 					label:'cate_name',
 					lazyLoad:(node,resolve)=>{
-						//console.log(node);
 						const { level} = node;
 						if (level == 1 || level == 2) {
 							const { data } = node;
@@ -780,7 +810,6 @@
 									id:item.id,
 									leaf:level >= 2,
 								}))
-								//console.log(res);
 								resolve(res);
 							})
 						}
@@ -794,7 +823,7 @@
 			//获取商品列表 keywo 搜索关键字
 			getGoodsList(keyword=""){
 				this.$http({
-					url:'goods?keyword='+this.keyword+'&page='+this.currentPage
+					url:'goods?keyword='+keyword+'&page='+this.currentPage
 				}).then(result=>{
 					const {code,msg,data} = result.data;
 					if (code == 200) {
@@ -890,18 +919,22 @@
 			},
 			//添加商品逻辑 发送请求
 			addGoods(){
-				this.$http({
-					url:'goods',
-					method:'post',
-					data:this.addGoodsData
-				}).then(result=>{
-					const {code,data,msg} = result.data;
-					if (code == 200) {
-						this.$message({message:'添加商品成功',type:'success'});
-					}else{
-						this.$message({message:msg,type:'warning'});
-					}
-				})
+				if (this.addGoodsData.evaluate_keyword.indexOf(',' == -1)) {
+					this.$message({message:'评论关键词请以英文,隔开',type:'warning'});
+				}else{
+					this.$http({
+						url:'goods',
+						method:'post',
+						data:this.addGoodsData
+					}).then(result=>{
+						const {code,data,msg} = result.data;
+						if (code == 200) {
+							this.$message({message:'添加商品成功',type:'success'});
+						}else{
+							this.$message({message:msg,type:'warning'});
+						}
+					})
+				}
 			},
 			//是否展示修改商品会话 id 商品id
 			editGoods(id){
@@ -923,25 +956,28 @@
 						this.update_cate_name = id_arr;
 			      		this.getSpecList(data.type_id);
 			      		this.getAttrList(data.type_id);
-						console.log(this.update_cate_name);
 					}else{
 						this.$message({message:msg,type:'warning'});
 					}
 				})
 			},
 			updateGoods(){
-				this.$http({
-					url:'goods/'+this.updateGoodsData.id,
-					method:'put',
-					data:this.updateGoodsData
-				}).then(result=>{
-					const {code,msg,data} = result.data;
-					if (code == 200) {
-						this.$message({message:'修改商品成功',type:'success'});
-					}else{
-						this.$message({message:msg,type:'warning'});
-					}
-				})
+				if (this.updateGoodsData.evaluate_keyword.indexOf(',')== -1) {
+					this.$message({message:'评论关键词请以英文,隔开',type:'warning'});
+				}else{
+					this.$http({
+						url:'goods/'+this.updateGoodsData.id,
+						method:'put',
+						data:this.updateGoodsData
+					}).then(result=>{
+						const {code,msg,data} = result.data;
+						if (code == 200) {
+							this.$message({message:'修改商品成功',type:'success'});
+						}else{
+							this.$message({message:msg,type:'warning'});
+						}
+					})
+				}
 			},
 			//删除商品逻辑 发送请求 id 商品id
 			deleteGoods(id){
@@ -984,6 +1020,16 @@
 	      	},
 	      	//移除已上传的logo 显示移除提示
 	      	handleRemove(file, fileList) {
+        		this.$message({message:`移除 ${ file.name } 成功`,type:'success'});
+      		},
+      		//移除已上传的logo 显示移除提示
+	      	handleAddRemove(file, fileList) {
+        		this.imagesList = [];
+        		this.$message({message:`移除 ${ file.name } 成功`,type:'success'});
+      		},
+      		//移除已上传的logo 显示移除提示
+	      	handleUpdateRemove(file, fileList) {
+        		this.updateImagesList = [];
         		this.$message({message:`移除 ${ file.name } 成功`,type:'success'});
       		},
       		//在移除前的判断 提示是否移除
@@ -1142,7 +1188,6 @@
 	      	},
 	      	//规格值下拉列表发生改变时的逻辑
 	      	specvalueChange(e,index,index1,name){
-	      		//console.log(e);
 	      		if (e !== "") {
 		      		this.spec_goods = this.specvalueList.find(item=>item.id ==e);
 		      		var value = this.spec_goods.spec_value;
@@ -1208,12 +1253,10 @@
 			      			}
 	  					}
 		      		}
-		      		// console.log(this.addGoodsData);
 	      		}
 	      	},
 	      	//规格值下拉列表发生改变时的逻辑
 	      	updateSpecvalueChange(e,index,index1,name){
-	      		//console.log(e);
 	      		if (e !== "") {
 		      		this.spec_goods = this.specvalueList.find(item=>item.id ==e);
 		      		var value = this.spec_goods.spec_value;
@@ -1279,7 +1322,6 @@
 			      			}
 	  					}
 		      		}
-		      		// console.log(this.updateGoodsData);
 	      		}
 	      	},
 	      	//属性值下拉列表发生改变时的逻辑
@@ -1288,14 +1330,12 @@
 	      		this.addGoodsData.attr[index].id=id;
 	      		this.addGoodsData.attr[index].attr_name=name;
 	      		this.addGoodsData.attr[index].attr_value=e;
-	      		//console.log(this.addGoodsData.attr);
 	      	},
 	      	updateAttrvalueChange(e,index,id,name){
 	      		this.updateGoodsData.attr.push({"id":"","attr_name":"","attr_value":""});
 	      		this.updateGoodsData.attr[index].id=id;
 	      		this.updateGoodsData.attr[index].attr_name=name;
 	      		this.updateGoodsData.attr[index].attr_value=e;
-	      		//console.log(this.updateGoodsData.attr);
 	      	},
 		},
 		mounted(){
@@ -1314,9 +1354,9 @@
 		margin-bottom:10px;
 	}
 	.search{
-		margin-top:10px;
 		display:flex;
 		flex-direction:row;
+		margin-top:10px;
 	}
 	.el-dialog{
 		.el-button{
@@ -1327,7 +1367,29 @@
 		color:red;
 	}
 	img{
-		width:100px;
-		height:100px;
+		width:50px;
+		height:50px;
+	}
+	.el-table{
+		/deep/ td.long_column{
+			.cell{
+				display:block;
+				display:-webkit-box;
+				over-flow:hidden;
+				height:69px;
+				line-height:23px;
+				-webkit-line-clamp:3;
+				-webkit-box-orient:vertical;
+				text-overflow:ellipsis;
+			}
+		}
+		/deep/ td.long_column:hover{
+			.cell{
+				display:block;
+				over-flow:visible;
+				height:100%;
+				cursor: pointer;
+			}
+		}
 	}
 </style>

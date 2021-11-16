@@ -1,6 +1,6 @@
 <template>
 	<div class="order">
-		<div class="head">
+		<div class="header">
 			<i class="el-icon-arrow-left back" @click="back"></i>
 			<input type="text" placeholder="搜索我的订单" v-model="keyword">
 			<i class="el-icon-more more"></i>
@@ -282,8 +282,8 @@
 				var	WIDtotal_amount = price*number;
 				WIDtotal_amount = WIDtotal_amount.toFixed(2);
 				var newwindow = window.open('_blank');
-				newwindow.location = "http://www.liuguanjin.top:8000/plugins/apply?WIDTQout_trade_no="+WIDTQout_trade_no+"&WIDtotal_amount="+WIDtotal_amount;
-				//window.location.href = "http://www.liuguanjin.top:8000/plugins/apply?WIDTQout_trade_no="+WIDTQout_trade_no+"&WIDtotal_amount="+WIDtotal_amount;
+				newwindow.location = "http://www.liuguanjin.top:8101/plugins/apply?WIDTQout_trade_no="+WIDTQout_trade_no+"&WIDtotal_amount="+WIDtotal_amount;
+				//window.location.href = "http://www.liuguanjin.top:8101/plugins/apply?WIDTQout_trade_no="+WIDTQout_trade_no+"&WIDtotal_amount="+WIDtotal_amount;
 				
 			},
 			accept(id){
@@ -378,28 +378,36 @@
 <style lang="less" scoped>
 	.order{
 		background-color:#F3F3F5;
-		.head{
+		.header{
 			display:flex;
 			flex-direction:row;
 			justify-content:space-between;
 			align-items:center;
 			height:60px;
-			line-height:60px;
 			padding:0 10px;
+			line-height:60px;
+			.back{
+				cursor: pointer;
+			}
 			input{
+				width:60%;
+				padding:6px 0 6px 10px;
 				border:1px solid red;
 				border-radius:15px;
-				padding:6px 0 6px 10px;
-				width:60%;
+			}
+			input:focus{
+				outline:none;
+				border:1px solid red;
+				border-radius:15px;
 			}
 		}
 		/deep/ .el-tabs__nav{
-			width:100%;
 			display:flex;
 			flex-direction:row;
+			width:100%;
 			.el-tabs__item{
-				padding:0;
 				width:17%;
+				padding:0;
 				text-align:center;
 			}
 			.el-tabs__item:nth-child(2){
@@ -416,17 +424,17 @@
 					align-items:center;
 					.goods{
 						width:100%;
-						background-color:white;
-						border-radius:15px;
-						padding:15px 15px 0 15px;
 						margin:15px 0;
+						padding:15px 15px 0 15px;
+						border-radius:15px;
+						background-color:white;
 						.goods-head{
 							display:flex;
 							flex-direction:row;
 							align-items:center;
 							p{
-								cursor:pointer;
 								margin-left:8px;
+								cursor:pointer;
 							}
 							p:after{
 								content:"";
@@ -456,52 +464,52 @@
 								flex-direction:column;
 								align-items:center;
 								p{
+									overflow:hidden;
 									padding:0;
 									font-size:16px;
 									line-height:20px;
-									overflow:hidden;
 								}
 								.goods-name{
-									margin:0 5px 5px 5px;
 									height:40px;
+									margin:0 5px 5px 5px;
 									cursor:pointer;
 								}
 								.value-name{
-									margin:0 5px;
 									align-self:flex-start;
+									margin:0 5px;
 									font-size:12px;
 									color:#aaa;
 								}
 							}
 							.goods-content-right{
-								margin-left:5px;
-								align-self:flex-start;
 								display:flex;
 								flex-direction:column;
 								align-items:center;
+								align-self:flex-start;
+								margin-left:5px;
 								span:nth-child(2){
-									color:#aaa;
 									align-self:flex-end;
+									color:#aaa;
 								}
 							}
 						}
 						.goods-price{
-							margin:10px 0;
 							display:flex;
 							flex-direction:row;
 							justify-content:flex-end;
 							align-items:center;
+							margin:10px 0;
 							span:nth-child(1){
-								color:#aaa;
 								margin-right:8px;
+								color:#aaa;
 							}
 						}
 						.goods-foot{
+							position:relative;
 							display:flex;
 							flex-direction:row;
 							justify-content:flex-end;
 							align-items:center;
-							position:relative;
 							margin:10px 0;
 							span{
 								text-align:center;
@@ -513,17 +521,17 @@
 								color:#aaa;
 							}
 							.common{
+								margin-right:10px;
 								padding:5px 10px;
 								border:1px solid #aaa;
 								border-radius:15px;
-								margin-right:10px;
 							}
 							.last{
+								margin-right:10px;
 								padding:5px 10px;
 								border:1px solid #f23030;
 								border-radius:15px;
 								color:#f23030;
-								margin-right:10px;
 							}
 						}
 					}

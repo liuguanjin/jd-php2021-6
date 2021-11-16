@@ -118,8 +118,8 @@
 		justify-content:space-between;
 		height:100%;
 		min-height:800px;
-		background-color:#eee;
 		padding-bottom:30px;
+		background-color:#eee;
 		.head{
 			display:flex;
 			flex-direction:row;
@@ -155,14 +155,14 @@
 			}
 		}
 		.nickname-botoom{
-			align-self:flex-start;
 			display:flex;
 			flex-direction:column;
 			align-items:center;
+			align-self:flex-start;
 			width:80%;
 			margin:0 auto;
-			background-color:white;
 			border-radius:20px;
+			background-color:white;
 			.nickname-why{
 				align-self:flex-start;
 				display:flex;
@@ -175,8 +175,8 @@
 					color:#f23030;
 				}
 				p{
-					padding:5px 0;
 					margin:0;
+					padding:5px 0;
 				}
 			}
 		}

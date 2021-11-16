@@ -14,15 +14,15 @@ export default {
 <style lang="less" scoped>
 	@import url("../less/common.less");
 	.header{
-		margin:0 auto;
-		max-width:800px;
 		position:relative;
+		max-width:800px;
+		margin:0 auto;
 		h1{
-			margin:0;
 			height:@navHeight;
-			line-height:@navHeight;
+			margin:0;
 			background-color:@mallColor;
 			.titleStyle(#fff,@titleSize,center);
+			line-height:@navHeight;
 		}
 		.back{
 			position:absolute;

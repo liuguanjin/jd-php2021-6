@@ -22,7 +22,7 @@
 		  				<i class="el-icon-bottom money"></i>
 				  		<p>降价提醒</p>
 		  			</div>
-		  			<div @click="addToCollect(id)">
+		  			<div @click="addToCollect(id)" class="add-collect">
 		  				<i class="el-icon-collection-tag money"></i>
 		  				<p>收藏</p>
 		  			</div>
@@ -407,27 +407,30 @@ export default {
 	ul{
 		list-style:none;
 	}
+	.back{
+		cursor: pointer;
+	}
 	.common{
-		width:120px;
-		height:100px;
-		background-color:rgba(0,0,0,0.7);
-		border:1px solid rgba(255,255,255,0.7);
 		position:absolute;
 		top:70%;
 		left:50%;
+		.flexColumnCenter();
+		justify-content:center;
+		z-index:101;
+		width:120px;
+		height:100px;
 		margin-left:-50px;
 		margin-top:-50px;
-		.flexColumnCenter();
-		z-index:101;
-		justify-content:center;
+		border:1px solid rgba(255,255,255,0.7);
+		background-color:rgba(0,0,0,0.7);
 		p{
 			margin:0 auto;
 			padding:0;
 		}
 		i{
 			padding:10px;
-			border-radius:50%;
 			font-size:16px;
+			border-radius:50%;
 		}
 	}
 	.success{
@@ -435,8 +438,8 @@ export default {
 			color:white;
 		}
 		.el-icon-check{
-			color:white;
 			border:1px solid #fff;
+			color:white;
 		}
 	}
 	.failed{
@@ -444,8 +447,8 @@ export default {
 			color:red;
 		}
 		.el-icon-close{
-			color:red;
 			border:1px solid red;
+			color:red;
 		}
 	}
 	.loginOrNot{
@@ -453,78 +456,78 @@ export default {
 			color:red;
 		}
 		.el-icon-close{
-			color:red;
 			border:1px solid red;
+			color:red;
 		}
 	}
 	.map{
-		margin:0 auto;
-		max-width:800px;
-		width:100%;
-		height:100%;
 		position:fixed;
-		bottom:0;
 		left:0;
 		right:0;
-		background-color:rgba(0,0,0,0.7);
+		bottom:0;
 		z-index:100;
+		width:100%;
+		max-width:800px;
+		height:100%;
+		margin:0 auto;
+		background-color:rgba(0,0,0,0.7);
 		transition:all 1s;
 		.bmView{
 			background-color:#fff;
 		}
 		.el-input{
-			width:50%;
-			background-color:#fff;
 			position:absolute;
 			left:25%;
 			bottom:25%;
 			z-index:10;
+			width:50%;
+			background-color:#fff;
 		}
 	}
 	.addnum-box{
-		margin:0 auto;
-		max-width:800px;
-		width:100%;
-		height:100%;
 		position:fixed;
 		bottom:0;
 		left:0;
 		right:0;
-		background-color:rgba(0,0,0,0.7);
 		z-index:100;
+		width:100%;
+		max-width:800px;
+		height:100%;
+		margin:0 auto;
+		background-color:rgba(0,0,0,0.7);
 		transition:all 1s;
 		.addnum{
 			position:absolute;
 			bottom:0;
-			width:100%;
 			.flexColumnCenter();
 			justify-content:space-between;
+			width:100%;
 			background-color:#fff;
 			.addnum-head{
-				align-self:flex-start;
 				.flexRowCenter();
+				align-self:flex-start;
 				img{
-					margin-left:10px;
+					align-self:flex-start;
 					width:90px;
 					height:90px;
-					align-self:flex-start;
+					margin-left:10px;
 				}
 				.addnum-des{
-					margin-left:10px;
-					height:90px;
 					.flexColumnCenter();
+					height:90px;
+					margin-left:10px;
 					.price{
 						align-self:flex-start;
-						color:@mallColor;
 						margin-left:5px;
+						color:@mallColor;
 					}
 					div{
 						.flexRowCenter();
 						p{
+							height:20px;
 							margin:0;
 							margin-left:5px;
 							font-size:12px;
-							height:20px;
 							line-height:20px;
 						}
 						.des{
@@ -537,39 +540,40 @@ export default {
 				}
 			}
 			.addnum-spec_goods{
-				align-self:flex-start;
 				display:flex;
 				flex-direction:column;
+				align-self:flex-start;
 				.spec{
 					.spec_name{
-						font-size: 13px;
-					    color: #262626;
-					    margin: 0 18px;
-					    font-weight: 700;
 					    height: 40px;
-					    line-height: 40px
+					    margin: 0 18px;
+						font-size: 13px;
+					    font-weight: 700;
+					    line-height: 40px;
+					    color: #262626;
 					}
 					.spec_values{
 						display:flex;
 						flex-direction:row;
 						flex-wrap:wrap;
-						padding: 0 6px;
 					    overflow: hidden;
+						padding: 0 6px;
 					    span{
-					    	padding: 0 18px;
+						    float: left;
+						    overflow: hidden;
 						    min-width: 20px;
 						    max-width: 270px;
-						    overflow: hidden;
 						    height: 30px;
-						    line-height: 30px;
-						    float: left;
-						    text-align: center;
 						    margin-left: 12px;
 						    margin-bottom: 10px;
-						    font-size: 11px;
-						    color: #262626;
+					    	padding: 0 18px;
 						    background: #f2f2f2;
+						    font-size: 11px;
+						    line-height: 30px;
+						    color: #262626;
+						    text-align: center;
 						    border-radius: 15px;
+						    cursor: pointer;
 					    }
 					    .selected{
 						    background:black;
@@ -579,49 +583,51 @@ export default {
 				}
 			}
 			.addnum-count{
-				margin-top:10px;
-				width:100%;
 				.flexRowCenter();
 				justify-content:space-between;
+				width:100%;
+				margin-top:10px;
 				.num-text{
-					margin-left:5px;
-					color:gray;
 					height:30px;
+					margin-left:5px;
 					line-height:30px;
+					color:gray;
 				}
 				.modify{
 					.flexRowCenter();
 					margin-right:5px;
 					.el-icon-minus{
-						background-color:#f7f7f7;
-						margin-right:5px;
 						flex:1;
 						height:30px;
-						line-height:30px;
+						margin-right:5px;
+						background-color:#f7f7f7;
 						text-align:center;
+						line-height:30px;
+						cursor: pointer;
 					}
 				 	.el-icon-plus{
-				 		background-color:#f7f7f7;
-						margin-right:5px;
 						flex:1;
 						height:30px;
-						line-height:30px;
+						margin-right:5px;
+				 		background-color:#f7f7f7;
 						text-align:center;
+						line-height:30px;
+						cursor: pointer;
 				 	}
 					p{
-						width:50px;
-						text-align:center;
 						flex:2;
+						width:50px;
+						height:30px;
 						margin-right:5px;
 						background-color:#f7f7f7;
-						height:30px;
+						text-align:center;
 						line-height:30px;
 					}
 				}
 			}
 			.addnum-foot{
-				width:100%;
 				.flexRowCenter();
+				width:100%;
 				.el-button{
 					width:50%;
 					margin-left:0;
@@ -630,9 +636,9 @@ export default {
 		}
 	}
 	.detail{
-		margin:0 auto;
 		max-width:800px;
 		height:100%;
+		margin:0 auto;
 		margin-bottom:60px;
 		.main{
 			width:100%;
@@ -648,55 +654,59 @@ export default {
 				height:40px;
 				.price-a{
 					float:left;
-					font-size:24px;
 					height:40px;
+					margin:0;
+					font-size:24px;
 					line-height:40px;
 					color:@mallColor;
-					margin:0;
 				}
 				.price-b{
+					.flexRowCenter();
+					float:right;
+					height:40px;
 					margin:0;
+					text-align:center;
 					color:gray;
 					.el-icon-bottom{
-						margin:0;
 						width:15px;
 						height:15px;
+						margin:0;
 						font-size:15px;
 						line-height:15px;
 					}
 					.el-icon-collection-tag{
-						margin:0;
 						width:15px;
 						height:15px;
+						margin:0;
 						font-size:15px;
 						line-height:15px;
 					}
-					float:right;
-					height:40px;
-					text-align:center;
-					.flexRowCenter();
 					div{
+						.flexColumnCenter();
 						margin-right:5px;
 						text-align:center;
-						.flexColumnCenter();
 						p{
 							margin:0;
 						}
 					}
+					.add-collect{
+						cursor: pointer;
+					}
 				}
 			}
 			.title{
-				border-top:1px solid #eee;
 				margin-bottom:5px;
+				border-top:1px solid #eee;
 				p{
 					font-size:16px;
 					font-weight:600;
 				}
 			}
 			.choose{
-				border-top:1px solid #eee;
-				margin-bottom:5px;
 				.flexRowCenter();
+				margin-bottom:5px;
+				border-top:1px solid #eee;
+				cursor: pointer;
 				.text{
 					margin:0 8px;
 					color:gray;
@@ -706,26 +716,26 @@ export default {
 				}
 			}
 			.detail-foot{
-				margin:0 auto;
-				max-width:800px;
 				position:fixed;
 				bottom:0;
 				left:0;
 				right:0;
-				height:50px;
-				z-inde:10;
-				background-color:#fff;
 				.flexRowCenter();
+				z-index:10;
+				max-width:800px;
+				height:50px;
+				margin:0 auto;
+				background-color:#fff;
 				.foot-text{
+					.flexRowCenter();
 					width:48%;
 					height:100%;
-					.flexRowCenter();
 					div{
-						height:100%;
-						color:gray;
-						width:33.3%;
 						.flexColumnCenter();
 						justify-content:center;
+						width:33.3%;
+						height:100%;
+						color:gray;
 						.el-icon-chat-dot-square{
 							margin-bottom:5px;
 						}
@@ -743,6 +753,7 @@ export default {
 					}
 					.cart-show{
 						position:relative;
+						cursor: pointer;
 						.none{
 							display:none;
 							position:absolute;
@@ -750,12 +761,12 @@ export default {
 							right:10px;
 							width:15px;
 							height:15px;
-							border-radius:50%;
 							background-color:red;
 							text-align:Center;
-							line-height:15px;
 							font-size:8px;
+							line-height:15px;
 							color:#fff;
+							border-radius:50%;
 						}
 						.cartnumshow{
 							position:absolute;
@@ -763,52 +774,54 @@ export default {
 							right:15px;
 							width:15px;
 							height:15px;
-							border-radius:50%;
 							background-color:red;
 							text-align:Center;
-							line-height:15px;
 							font-size:8px;
+							line-height:15px;
 							color:#fff;
+							border-radius:50%;
 						}
 					}
 				}
 				.foot-button{
+					.flexRowCenter();
 					width:52%;
 					height:100%;
-					.flexRowCenter();
 					.el-button{
+						width:50%;
+						height:100%;
 						margin:0;
 						padding:0;
-						height:50px;
-						width:50%;
 						font-size:12px;
-						height:100%;
 						line-height:56px;
 					}
 				}
 			}
 			.address{
-				border-top:1px solid #eee;
-				margin-bottom:5px;
 				.flexRowCenter();
+				margin-bottom:5px;
+				border-top:1px solid #eee;
 				.address-text{
-					color:gray;
 					margin:0 8px;
+					color:gray;
+				}
+				.address-detail{
+					cursor: pointer;
 				}
 			}
 			.transition{
-				border-top:1px solid #eee;
-				margin-bottom:5px;
 				.flexRowCenter();
+				margin-bottom:5px;
+				border-top:1px solid #eee;
 				.transition-text{
-					color:gray;
 					margin:0 8px;
+					color:gray;
 				}
 			}
 			.description{
-				border-top:1px solid #eee;
-				margin-bottom:5px;
 				.flexRowCenter();
+				margin-bottom:5px;
+				border-top:1px solid #eee;
 				p{
 					margin-left:8px;
 				}
@@ -824,9 +837,10 @@ export default {
 				}
 			}
 			.shop-message{
-				border-top:1px solid #eee;
-				margin-bottom:5px;
 				.flexRowCenter();
+				margin-bottom:5px;
+				border-top:1px solid #eee;
+				cursor: pointer;
 				img{
 					width:50px;
 					height:50px;

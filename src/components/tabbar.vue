@@ -55,18 +55,18 @@ export default{
 </script>
 <style lang="less" scoped>
 	.tabbar{
+		position:fixed;
+		bottom:0;
+		z-index: 2;
 		width:100%;
 		max-width:800px;
 		opacity: 0.9;
-		z-index: 2;
-		position:fixed;
-		bottom:0;
 		.el-menu-item{
-			width:25%;
 			display:flex;
 			flex-direction:row;
 			justify-content:center;
 			align-items:center;
+			width:25%;
 		}
 	}
 </style>

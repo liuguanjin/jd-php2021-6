@@ -68,13 +68,13 @@
 <style lang="less" scoped>
 	.my-account{
 		.head{
-			width:100%;
-			background-color:#eee;
 			display:flex;
 			flex-direction:row;
 			justify-content:space-between;
 			align-items:center;
+			width:100%;
 			height:40px;
+			background-color:#eee;
 			line-height:40px;
 			.back{
 				margin-left:10px;

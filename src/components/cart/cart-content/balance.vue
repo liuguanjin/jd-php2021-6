@@ -1,9 +1,12 @@
 <template>
 	<div class="balance">
-		<div class="head">
+		<!-- 前台结算界面 -->
+		<!-- 结算头部 -->
+		<div class="header">
   			<i class="el-icon-back back" @click="back"></i>
       		<p class="head-center">结算</p>
   		</div>
+  		<!-- 结算界面的收货地址 -->
 		<div class="address" @click="chooseAddress">
 			<div class="left-location">
 				<i class="el-icon-location-outline"></i>
@@ -21,6 +24,7 @@
 				暂无收货地址，请先添加
 			</div>
 		</div>
+		<!-- 结算的商品 -->
 		<div class="goods" v-for="(item,index) in goods">
 			<div class="goods-shop">
 				<i class="el-icon-s-shop"></i>
@@ -63,6 +67,7 @@
 				<span>共{{goods_ids[index].number}}件,小计:¥{{item.spec_goods.price*goods_ids[index].number}}</span>
 			</div>
 		</div>
+		<!-- 结算右下角统计 -->
 		<div class="place-order">
 			<span>共{{totalNumber}}件,小计:¥{{totalPrice}}</span>
 			<el-button type="danger" round @click="commitOrder">提交订单</el-button>
@@ -83,7 +88,7 @@
 				},
 				totalNumber:0,
 				totalPrice:0,
-				haveAddress:true,
+				haveAddress:false,
 				user_note:"",
 			}
 		},
@@ -97,20 +102,23 @@
 			if (userinfo != undefined && userinfo != '' && userinfo != null) {
 				this.user_id = userinfo.user_id;
 			}
+			//得到从上级界面传下来结算的商品id
 			this.goods_ids = this.$route.query.goods_ids;
+			//商品的总数
 			for(var i = 0;i < this.goods_ids.length;i ++ ){
 				if (this.goods_ids[i].number) {
 					this.totalNumber += this.goods_ids[i].number;
 				}
 			}
+			//得到结算商品的信息及总价
 			this.getGoods();
+			//如果从选择地址中返回 则界面中的地址改为选择地址界面选中的地址
 			if (this.$route.query.address) {
 				this.address = this.$route.query.address;
+				this.haveAddress = true;
 			}else{
+				//如果从购物车中返回 则界面中的地址改为用户默认地址
 				this.getAddress();
-			}
-			if (this.address.length == 0) {
-				this.haveAddress = false;
 			}
 		},
 		methods:{
@@ -118,9 +126,11 @@
       			replaceCartArr:"replaceCartArr",
   			}),
 			chooseAddress(){
-				this.$router.push({name:'address',query:{id:this.user_id,goods_ids:this.goods_ids}});
+				//跳转到选择收货地址界面
+				this.$router.push({name:'address',query:{id:this.user_id,goods_ids:this.goods_ids,fromBalance:true}});
 			},
 			commitOrder(){
+				//提交结算的订单
 				var order_date = new Date();
 				var sNow = "";
 				sNow += order_date.getFullYear();
@@ -140,6 +150,7 @@
 					const {code,msg,data} = result.data;
 					if (code == 200) {
 						this.$message({message:'提交订单成功',type:'success'});
+						//结算后购物车中的商品清除
 						for(var i = 0;i < this.arr.length;i ++){
 							for(var j = 0;j < this.goods_ids.length;j ++){
 								if (this.arr[i].spec_goods_id == this.goods_ids[j].spec_goods_id) {
@@ -147,6 +158,7 @@
 								}
 							}
 						}
+						//跳转到结算成功界面
 						this.$router.push('ordersuccess');
 					}else{
 						this.$message({message:'提交订单失败，请重新结算',type:'warning'});
@@ -154,9 +166,11 @@
 				})
 			},
 			back(){
-				this.$router.go(-1);
+				//返回购物车
+				this.$router.push('/cart');
 			},
 			getGoods(){
+				//根据商品id发起请求 获取商品信息
 				this.$homehttp({
 		 			url:'balancegoods',
 		 			method:'post',
@@ -166,6 +180,7 @@
 		 			if (code == 200) {
 		 				for(var i = 0;i < data.length;i ++ ){
 		 					if (typeof(data[i].spec_goods.price) == 'string') {
+		 						//根据规格商品价格得到总价
 				 				data[i].spec_goods.price = parseFloat(data[i].spec_goods.price);
 				 				this.totalPrice += (data[i].spec_goods.price *  this.goods_ids[i].number)
 		 					}
@@ -177,12 +192,14 @@
 		 		})
 			},
 			getAddress(){
+				//根据用户id获取用户保存的收获地址
 				this.$homehttp({
 					url:'address?page=balance&user_id='+this.user_id
 				}).then(result=>{
 					const {code,msg,data} = result.data;
 					if (code == 200) {
 						this.address = data;
+						this.haveAddress = true;
 					}else{
 					}
 				})
@@ -194,49 +211,51 @@
 <style lang="less" scoped>
 	@import url("../../less/common.less");
 	.balance{
-		background-color:#eee;
 		.flexColumnCenter();
+		background-color:#eee;
 	}
-	.head{
+	.header{
 	 	position: relative;
-      	height:44px;
-      	line-height:44px;
-      	background-color:#f23030;
       	width:100%;
+      	height:44px;
+      	background-color:#f23030;
+      	line-height:44px;
       	.back{
       		position:absolute;
       		left:20px;
       		height:44px;
-    		line-height:44px;
     		font-size:20px;
+    		line-height:44px;
+    		cursor: pointer;
       	}
   	 	.head-center{
+	        margin:0;
 	        text-align:center;
 	        font-weight:bold;
-	        margin:0;
   		}
 	}
 	.address{
-		padding:10px 5px;
-		margin-top:10px;
-		border-radius:10px;
-		width:95%;
-		background-color:#fff;
-		.flexRowCenter();
 		position:relative;
+		.flexRowCenter();
+		width:95%;
+		margin-top:10px;
+		padding:10px 5px;
+		background-color:#fff;
+		border-radius:10px;
 		.left-location{
 			width:10%;
 			text-align:center;
 			i{
 				width:20px;
 				height:20px;
-				line-height:20px;
-				text-align:center;
 				background-color:red;
+				text-align:center;
+				line-height:20px;
 			}
 		}
 		.right-message{
 			width:80%;
+			cursor: pointer;
 		}
 	}
 	.address:after{
@@ -253,18 +272,18 @@
 		transform:rotate(45deg);
 	}
 	.goods{
-		border-radius:10px;
-		width:95%;
-		background-color:#fff;
-		margin:10px 0;
 		position:relative;
-		padding:16px 5px;
 		.flexColumnCenter();
+		width:95%;
+		margin:10px 0;
+		padding:16px 5px;
+		background-color:#fff;
+		border-radius:10px;
 		.other{
-			width:60%;
-			margin:10px 30px;
 			.flexRowCenter();
 			justify-content:space-between;
+			width:60%;
+			margin:10px 30px;
 		}
 		.after:after{
 			content:"";
@@ -278,8 +297,8 @@
 			transform:rotate(45deg);
 		}
 		.goods-shop{
-			align-self:flex-start;
 			.flexRowCenter();
+			align-self:flex-start;
 			.el-icon-s-shop{
 				width:15px;
 				height:15px;
@@ -291,8 +310,8 @@
 				font-weight:600;
 			}
 			span:hover{
-				cursor:pointer;
 				color:#FF4400;
+				cursor:pointer;
 			}
 		}
 		.goods-message{
@@ -304,22 +323,22 @@
 				height:100px;
 			}
 			.goods-detail{
-				margin:0 15px;
 				.flexColumnCenter();
 				align-items:flex-start;
+				margin:0 15px;
 				.goods-name{
-					font-size:14px;
-					height:40px;
-					line-height:20px;
 					overflow:hidden;
+					height:40px;
 					margin-bottom:10px;
+					font-size:14px;
+					line-height:20px;
 				}
 				.spec-goods{
-					font-size:14px;
-					height:20px;
-					line-height:20px;
 					overflow:hidden;
+					height:20px;
 					background-color:#Eee;
+					font-size:14px;
+					line-height:20px;
 				}
 			}
 			.goods-price{
@@ -330,8 +349,8 @@
 			position:absolute;
 			right:20px;
 			bottom:0;
-			font-size:18px;
 			height:20px;
+			font-size:18px;
 			line-height:20px;
 			color:red;
 		}

@@ -1,5 +1,6 @@
 <template>
 	<div class="shop_spec">
+		<!-- 后台商品规格界面 -->
 		<!-- 规格列表界面头部显示 -->
 		<el-breadcrumb separator-class="el-icon-arrow-right">
 			<el-breadcrumb-item :to="{ path: '/shop' }">商城</el-breadcrumb-item>
@@ -312,9 +313,9 @@
 		margin-bottom:10px;
 	}
 	.search{
-		margin-top:10px;
 		display:flex;
 		flex-direction:row;
+		margin-top:10px;
 	}
 	.el-dialog{
 		.el-button{

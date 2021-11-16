@@ -1,6 +1,6 @@
 <template>
 	<div class="vip_manager">
-		
+		这里是会员管理界面
 	</div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
 	<div class="evaluate">
-		<div class="head">
+		<div class="header">
 			<i class="el-icon-arrow-left back" @click="back"></i>
 			<span class="title">发表评价</span>
 			<span class="release" @click="evaluate">发布</span>
@@ -16,9 +16,14 @@
 			<div class="describe">
 				<div class="evaluate-grade">
 					<span>描述相符</span>
-					<span><i class="el-icon-jdhaoping"></i>好评</span>
-					<span><i class="el-icon-jddisappointed-full"></i>中评</span>
-					<span><i class="el-icon-jddisappointed-full"></i>差评</span>
+					<span 
+					v-for="(item,index) in evaluateGrade" 
+					:class="item.chooseClass"
+					@click="chooseGrade(index)"
+					>
+						<i :class="item.class"></i>
+						{{item.grade}}
+					</span>
 				</div>
 			</div>
 			<div class="evaluate-keyword">
@@ -35,7 +40,7 @@
 			<el-upload
 	    	ref="upload"
             class="upload-demo"
-            action="http://www.liuguanjin.top:8000/8101"
+            action="http://www.liuguanjin.top:8101"
             :data="myData"
             :auto-upload="false"
         	multiple
@@ -60,22 +65,22 @@
 			<div class="rate">
 				<span>描述相符</span>
 				<el-rate
-	  				v-model="value1"
-	  				show-text>
+  				v-model="evaluateData.evaluate_describe_score"
+  				show-text>
 				</el-rate>
 			</div>
 			<div class="rate">
 				<span>物流服务</span>
 				<el-rate
-	  				v-model="value2"
-	  				show-text>
+  				v-model="evaluateData.evaluate_logistics_score"
+  				show-text>
 				</el-rate>
 			</div>
 			<div class="rate">
 				<span>服务态度</span>
 				<el-rate
-	  				v-model="value3"
-	  				show-text>
+  				v-model="evaluateData.evaluate_server_score"
+  				show-text>
 				</el-rate>
 			</div>
 		</div>
@@ -103,8 +108,30 @@
 					goods_id:"",
 					user_id:"",
 					content:"",
+					evaluate_grade:0,
+					evaluate_describe_score:5.0,
+					evaluate_logistics_score:5.0,
+					evaluate_server_score:5.0,
+					is_choice:0,
 					evaluate_images:[],
-				}
+				},
+				evaluateGrade:[
+					{
+						class:'el-icon-jdhaoping',
+						grade:'好评',
+						chooseClass:'choose',
+					},
+					{
+						class:'el-icon-jddisappointed-full',
+						grade:'中评',
+						chooseClass:'normal',
+					},
+					{
+						class:'el-icon-jddisappointed-full',
+						grade:'差评',
+						chooseClass:'normal',
+					}
+				]
 			}
 		},
 		methods:{
@@ -123,6 +150,17 @@
 						this.$message({message:msg,type:'warning'});
 					}
 				})
+			},
+			//选择评价等级
+			chooseGrade(index){
+				for (var i = 0;i < this.evaluateGrade.length;i++) {
+					if (i == index) {
+						this.evaluateGrade[i].chooseClass = 'choose';
+					}else{
+						this.evaluateGrade[i].chooseClass = 'normal';
+					}
+				}
+				this.evaluateData.evaluate_grade = index;
 			},
 			evaluate(){
 				this.evaluateData.goods_id = this.evaluateGoods.goods_id;
@@ -217,45 +255,41 @@
 	display:flex;
 	flex-direction:column;
 	align-items:center;
-	.el-icon-jdhaoping{
-		color:red;
-	}
-	.el-icon-jddisappointed-full{
-		color:gray;
-	}
+	
 	.evaluate-input{
 		border:none;
 		outline:none;
 	}
-	.head{
-		width:100%;
-		background-color:white;
+	.header{
 		display:flex;
 		flex-direction:row;
 		justify-content:space-between;
 		align-items:center;
+		width:100%;
 		height:40px;
+		background-color:white;
 		line-height:40px;
 		.back{
 			margin-left:10px;
+			cursor: pointer;
 		}
 		.title{
 			font-size:18px;
 			font-weight:550;
 		}
 		.release{
-			color:#f23030;
 			margin-right:10px;
+			color:#f23030;
 		}
 	}
 	.evaluate-goods{
-		width:88%;
-		background-color:white;
 		display:flex;
 		flex-direction:column;
-		border-radius:15px;
-		padding:20px;
+		width:88%;
 		margin:10px 0;
+		padding:20px;
+		background-color:white;
+		border-radius:15px;
 		.goods-top{
 			display:flex;
 			flex-direction:row;
@@ -265,20 +299,20 @@
 				height:10%;
 			}
 			.goods-detail{
-				width:75%;
 				display:flex;
 				flex-direction:column;
 				justify-content:center;
+				width:75%;
 				margin-left:10px;
 				span:nth-child(1){
-					white-space:nowrap;
 					overflow:hidden;
-					text-overflow:ellipsis;
 					margin-bottom:10px;
+					text-overflow:ellipsis;
+					white-space:nowrap;
 				}
 				span:nth-child(2){
-					color:#aaa;
 					font-size:14px;
+					color:#aaa;
 				}
 			}
 		}
@@ -293,6 +327,14 @@
 			span:nth-child(1){
 				margin-right:10px;
 			}
+			.choose{
+				color:red;
+				cursor: pointer;
+			}
+			.normal{
+				color:gray;
+				cursor: pointer;
+			}
 		}
 		.evaluate-keyword{
 			display:flex;
@@ -301,14 +343,14 @@
 			flex-wrap:wrap;
 			margin-bottom:30px;
 			span{
-				padding:8px;
-				border-radius:30px;
-				border:1px solid #aaa;
+				height:20px;
 				margin-right:5%;
 				margin-bottom:5px;
-				text-align:center;
-				height:20px;
+				padding:8px;
+				border:1px solid #aaa;
 				line-height:20px;
+				text-align:center;
+				border-radius:30px;
 			}
 		}
 		.tips{
@@ -320,16 +362,16 @@
 		}
 	}
 	.evaluate-shop{
-		width:88%;
-		background-color:white;
 		display:flex;
 		flex-direction:column;
-		border-radius:15px;
-		padding:20px;
+		width:88%;
 		margin-bottom:20px;
+		padding:20px;
+		border-radius:15px;
+		background-color:white;
 		.shop_name{
-			color:#aaa;
 			margin-bottom:20px;
+			color:#aaa;
 		}
 		.rate{
 			display:flex;

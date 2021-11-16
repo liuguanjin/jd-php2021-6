@@ -64,9 +64,9 @@
   		</div>
   	</div>
   	<div class="shop_content">
-  		<div class="goods" v-for="(item,index) in shopDetail.goods" :key="index" @click="enterDetail(item.id)">
-  			<img :src="'http://www.liuguanjin.top:8101'+item.goods_logo" alt="">
-  			<p class="title">{{item.goods_name}}</p>
+  		<div class="goods" v-for="(item,index) in shopDetail.goods" :key="index">
+  			<img :src="'http://www.liuguanjin.top:8101'+item.goods_logo" alt=""  @click="enterDetail(item.id)">
+  			<p class="title"  @click="enterDetail(item.id)">{{item.goods_name}}</p>
   			<p class="price red">${{item.goods_price}}</p>
   			<p class="number red">剩余:{{item.goods_number}}</p>
   		</div>
@@ -185,7 +185,6 @@
 	 					}
 	 				})
  				}
- 				console.log(this.shopDetail);
  			},
  			//取消收藏
  			cancelCollectShop(id){
@@ -225,15 +224,15 @@
 		background-color:#eee;
 		font-size:14px;
 		.shop_header{
-			background-color:#400553;
 			display:flex;
 			flex-direction:row;
 			justify-content:space-between;
+			background-color:#400553;
 			.header_left{
-				margin:10px;
 				display:flex;
 				flex-direction:row;
 				align-items:center;
+				margin:10px;
 				img{
 					width:60px;
 				}
@@ -278,6 +277,7 @@
 					}
 				}
 				.more{
+					cursor: pointer;
 					.el-dropdown{
 						color:white;
 					}
@@ -285,37 +285,39 @@
 			}
 		}
 		.shop_content{
-			margin:10px;
 			display:flex;
 			flex-direction:row;
-			justify-content:auto;
+			justify-content:center;
 			align-items:center;
 			flex-wrap:wrap;
+			margin-top:10px;
 			.goods{
 				display:flex;
 				flex-direction:column;
 				justify-content:space-between;
 				align-items:center;
+				width:45%;
+				margin:0 10px 10px 10px;
 				border-radius:15px;
 				background-color:white;
-				width:47.5%;
-				margin:0 10px 10px 0;
 				img{
 					width:80%;
+					cursor: pointer;
 				}
 				.title{
+					overflow:hidden;
+					height:40px;
+					margin:5px;
 					font-size:14px;
 					line-height:20px;
-					height:40px;
-					overflow:hidden;
-					margin:5px;
+					cursor: pointer;
 				}
 				.red{
+					align-self:flex-start;
+					margin:5px;
 					font-size:16px;
 					line-height:16px;
-					align-self:flex-start;
 					color:red;
-					margin:5px;
 				}
 			}
 		}

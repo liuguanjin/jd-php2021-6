@@ -49,7 +49,6 @@
 					var id = parseInt(this.shopCollectArr[i]);
 					shop_collect_ids.push(id);
 				}
-				console.log(shop_collect_ids);
 				if (shop_collect_ids.length === 0) {
 					this.isShowTips = true;
 				}else{
@@ -84,18 +83,18 @@
 	@import url("../../less/common.less");
 	.follow-shop{
 		.flexColumnCenter();
-		background-color:#eee;
 		padding-bottom:10px;
+		background-color:#eee;
 		.head{
-			width:100%;
 			.flexRowCenter();
-			background-color:white;
 			justify-content:flex-start;
+			width:100%;
 			height:44px;
+			background-color:white;
 			line-height:44px;
 			.back{
-				font-size:16px;
 				margin-left:10px;
+				font-size:16px;
 			}
 			p{
 				margin:0 auto;
@@ -105,44 +104,44 @@
 		.shop{
 			width:86%;
 			.flexRowCenter();
-			background-color:white;
-			border-radius:20px;
 			margin:10px 0;
 			padding:10px 0;
+			background-color:white;
+			border-radius:20px;
 			img{
 				width:60px;
 				height:60px;
-				border:1px solid #eee;
 				margin-left:10px;
+				border:1px solid #eee;
 			}
 			.shop-right{
 				.flexColumnCenter();
 				align-items:flex-start;
 				margin-left:10px;
-				border-left:1px solid #eee;
 				padding-left:10px;
+				border-left:1px solid #eee;
 				p{
 					width:100%;
 					margin:5px 0;
 					padding:0;
 				}
 				span{
-					margin:5px 0;
-					border:1px solid #FF4400;
-					border-radius:10px;
-					padding:3px;
-					font-size:12px;
 					height:16px;
+					margin:5px 0;
+					padding:3px;
+					border:1px solid #FF4400;
+					font-size:12px;
 					line-height:16px;
+					border-radius:10px;
 				}
 				p:hover{
-					cursor:pointer;
 					color:#FF4400;
+					cursor:pointer;
 				}
 				.goods{
-					overflow:hidden;
 					display:flex;
 					flex-direction:row;
+					overflow:hidden;
 					.goods-item{
 						width:20%;
 						img{
