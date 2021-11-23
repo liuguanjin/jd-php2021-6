@@ -51,7 +51,10 @@
 	    	align="center"
 	    	>
 	    		<template slot-scope="scope">
-		    		<img :src="'http://www.liuguanjin.top:8101'+scope.row.goods_logo" alt="正在加载">
+		    		<img 
+		    		:src="defaultImage" 
+		 			v-real-img="'http://www.liuguanjin.top:8101'+scope.row.goods_logo"
+		    		>
 		      	</template>
 		    </el-table-column>
 		    <el-table-column
@@ -549,7 +552,10 @@
 			    <el-form-item 
 			    label="商品logo" 
 			    >
-			    	<img :src="'http://www.liuguanjin.top:8101/'+updateGoodsData.goods_logo" alt="">
+			    	<img 
+			    	:src="defaultImage" 
+		 			v-real-img="'http://www.liuguanjin.top:8101/'+updateGoodsData.goods_logo"
+			    	>
 			    	<el-upload
                     class="upload-demo"
                     action="http://www.liuguanjin.top:8101/logo"
@@ -722,6 +728,7 @@
 			return {
 				isShowAddGoods:false,
 				isShowEditGoods:false,
+				defaultImage:this.defaultImage,
 				goodsList:[],
 				total:0,
 				perPage:10,
@@ -868,7 +875,7 @@
 				}).then(result=>{
 					const {code,data,msg} = result.data;
 					if (code == 200) {
-						this.shopList = data;
+						this.shopList = data.data;
 					}else{
 						this.$message({message:msg,type:'warning'});
 					}
@@ -919,7 +926,7 @@
 			},
 			//添加商品逻辑 发送请求
 			addGoods(){
-				if (this.addGoodsData.evaluate_keyword.indexOf(',' == -1)) {
+				if (this.addGoodsData.evaluate_keyword.indexOf(',') == -1) {
 					this.$message({message:'评论关键词请以英文,隔开',type:'warning'});
 				}else{
 					this.$http({

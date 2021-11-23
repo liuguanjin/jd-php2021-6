@@ -7,7 +7,10 @@
 		</div>
 		<!-- 登录界面logo -->
 	  	<div class="logo">
-	  		<img src="https://person-use.oss-cn-shenzhen.aliyuncs.com/images/cart-login/1.jpg" alt="">	
+	  		<img 
+	  		:src="defaultImage" 
+ 			v-real-img="'https://person-use.oss-cn-shenzhen.aliyuncs.com/images/cart-login/1.jpg'"
+	  		>	
 	  	</div>
 		<el-form ref="form" :model="loginForm" label-width="80px">
 		  	<el-form-item label="用户名">
@@ -51,6 +54,7 @@ export default {
  			uanmePrompt:"",
  			show:false,
  			verify:"",
+ 			defaultImage:this.defaultImage,
  		}
  	},
  	created(){

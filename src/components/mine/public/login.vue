@@ -2,7 +2,10 @@
   <div class="main">
   	<!-- 登录界面logo -->
   	<div class="logo">
-  		<img src="https://person-use.oss-cn-shenzhen.aliyuncs.com/images/cart-login/1.jpg" alt="">	
+  		<img 
+  		:src="defaultImage" 
+ 			v-real-img="'https://person-use.oss-cn-shenzhen.aliyuncs.com/images/cart-login/1.jpg'"
+  		>	
   	</div>
   	<!-- 账号注册框 -->
   	<el-form ref="form" :model="loginForm" label-width="80px">
@@ -43,6 +46,7 @@ export default {
  			show:false,
  			verify:{src:'',uniqid:0},
  			isAllowLogin:false,
+ 			defaultImage:this.defaultImage,
  		}
  	},
  	computed:{

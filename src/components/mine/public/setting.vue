@@ -6,7 +6,10 @@
   		</div>
   		<div class="avatar cursor" @click="toMyMessage">
   			<div>
-	  			<img :src="userDetail.avatar?'http://www.liuguanjin.top:8101'+userDetail.avatar:''" alt="我的头像">
+	  			<img 
+	  			:src="defaultImage" 
+	 			v-real-img="'http://www.liuguanjin.top:8101'+userDetail.avatar"
+	  			>
 	  			<p>{{userDetail.nickname}}</p>
   			</div>
 			<p class="enter">></p>
@@ -66,6 +69,7 @@ export default {
 	 	return{
 	 		show:false,
 	 		id:0,
+	 		defaultImage:this.defaultImage,
 	 		userDetail:{
 
 	 		},

@@ -3,7 +3,10 @@
   	<div class="shop_header">
   		<div class="header_left">
   			<div class="img">
-  				<img :src="'http://www.liuguanjin.top:8101'+shopDetail.shop_logo" alt="">
+  				<img 
+  				:src="defaultImage" 
+		 			v-real-img="'http://www.liuguanjin.top:8101'+shopDetail.shop_logo"
+  				>
   			</div>
   			<div class="shop_name">
   				<p>{{shopDetail.shop_name}}</p>
@@ -65,7 +68,11 @@
   	</div>
   	<div class="shop_content">
   		<div class="goods" v-for="(item,index) in shopDetail.goods" :key="index">
-  			<img :src="'http://www.liuguanjin.top:8101'+item.goods_logo" alt=""  @click="enterDetail(item.id)">
+  			<img 
+  			:src="defaultImage" 
+	 			v-real-img="'http://www.liuguanjin.top:8101'+item.goods_logo" 
+  			@click="enterDetail(item.id)"
+  			>
   			<p class="title"  @click="enterDetail(item.id)">{{item.goods_name}}</p>
   			<p class="price red">${{item.goods_price}}</p>
   			<p class="number red">剩余:{{item.goods_number}}</p>
@@ -90,7 +97,8 @@
 				value:4.5,
 				//该用户下已收藏的店铺
 				shopCollectArr:[],
-				isCollect:true
+				isCollect:true,
+				defaultImage:this.defaultImage,
 			}
 		},
 		created(){

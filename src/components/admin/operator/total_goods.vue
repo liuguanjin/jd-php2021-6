@@ -33,7 +33,10 @@
 	    	align="center"
 	    	>
 	    		<template slot-scope="scope">
-		    		<img :src="'http://www.liuguanjin.top:8101'+scope.row.goods_logo" alt="正在加载">
+		    		<img 
+		    		:src="defaultImage" 
+		 			v-real-img="'http://www.liuguanjin.top:8101'+scope.row.goods_logo"
+		    		>
 		      	</template>
 		    </el-table-column>
 		    <el-table-column
@@ -57,6 +60,7 @@
 		data(){
 			return {
 				goodsSaleRankingData:[],
+				defaultImage:this.defaultImage,
 			}
 		},
 		methods:{

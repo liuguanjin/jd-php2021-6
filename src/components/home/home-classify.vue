@@ -2,7 +2,10 @@
   <div class="home-classify">
   	<!-- 首页分类模块 -->
   	<div class="classify-item" v-for="(item,index) in homeClassify" @click="enterDetail(item.title)">
-  		<img :src="item.imgSrc">
+  		<img 
+  		:src="defaultImage" 
+ 			v-real-img="item.imgSrc"
+  		>
   		<p class="title">{{item.title}}</p>
   	</div>
   </div>
@@ -13,7 +16,8 @@ import axios from "axios";
 export default {
  	data(){
  		return {
- 			homeClassify:[]
+ 			homeClassify:[],
+ 			defaultImage:this.defaultImage,
  		}
  	},
  	created(){

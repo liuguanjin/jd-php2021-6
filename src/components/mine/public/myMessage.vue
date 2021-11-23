@@ -6,7 +6,10 @@
       		<i class="el-icon-more more"></i>
   		</div>
 		<div class="img">
-			<img :src="userDetail.avatar?'http://www.liuguanjin.top:8101'+userDetail.avatar:''" alt="正在加载">
+			<img 
+			:src="defaultImage" 
+ 			v-real-img="'http://www.liuguanjin.top:8101'+userDetail.avatar"
+			>
 			<el-upload
             class="upload-demo"
             action="http://www.liuguanjin.top:8101/logo"
@@ -64,6 +67,7 @@
 					type:'avatar'
 				},
 				isShowChooseSex:false,
+				defaultImage:this.defaultImage,
 			}
 		},
 		created(){

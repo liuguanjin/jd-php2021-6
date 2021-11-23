@@ -60,6 +60,34 @@ Vue.use(Main);
 Vue.use(Footer);
 Vue.prototype.$message = Message;
 Vue.prototype.$confirm = MessageBox.confirm;
+//全局变量defaultImage的注册
+Vue.prototype.defaultImage = 'images/jd.jpg';
+//全局注册img图片无法加载时的默认图片
+Vue.directive('real-img',async function(el,binding){
+  let imgURL = binding.value;
+  if (imgURL) {
+    let exist = await imageIsExist(imgURL);
+    if (exist) {
+      el.setAttribute('src',imgURL);
+    }
+  }
+})
+let imageIsExist = function(url){
+  return new Promise((resolve)=>{
+    var img = new Image();
+    img.onload = function(){
+      if (this.complete == true) {
+        resolve(true);
+        img = null;
+      }
+    }
+    img.onerror = function(){
+      resolve(false);
+      img = null;
+    }
+    img.src = url;
+  })
+}
 new Vue({
   el: '#app',
   router:router,

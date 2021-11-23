@@ -17,7 +17,11 @@
 		  			<!-- 商品选中图标 -->
 		  			<i :class="item.goods.goods_is_selected?'icon-select':'icon-common'" @click="changeGoodsSelect(index)"></i>
 		  			<!-- 商品图片 -->
-			  		<img :src="'http://www.liuguanjin.top:8101'+item.goods.goods_logo" alt="" @click="enterDetail(item.goods.id)">
+			  		<img 
+			  		:src="defaultImage" 
+		 			v-real-img="'http://www.liuguanjin.top:8101'+item.goods.goods_logo"
+			  		@click="enterDetail(item.goods.id)"
+			  		>
 			  		<div class="shop-des">
 			  			<!-- 商品标题 -->
 			  			<p class="title" @click="enterDetail(item.goods.id)">{{item.goods.goods_name}}</p>
@@ -79,6 +83,7 @@ export default {
 			isCal:true,
 			noLogin:false,
 			isShowCollectSuccess:false,
+			defaultImage:this.defaultImage,
 		}
 	},
  	computed:{

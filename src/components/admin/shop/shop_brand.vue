@@ -50,7 +50,10 @@
 	    	align="center"
 	    	>
 		    	<template slot-scope="scope">
-		    		<img :src="'http://www.liuguanjin.top:8101'+scope.row.logo" alt="正在加载">
+		    		<img 
+		    		:src="defaultImage" 
+		 			v-real-img="'http://www.liuguanjin.top:8101'+scope.row.logo"
+		    		>
 		      	</template>
 	    	</el-table-column> 
 	    	<el-table-column
@@ -259,7 +262,10 @@
 			    <el-form-item 
 			    label="品牌图片" 
 			    >
-			    	<img :src="'http://www.liuguanjin.top:8101'+updateBrandData.logo" alt="正在加载">
+			    	<img 
+			    	:src="defaultImage" 
+		 			v-real-img="'http://www.liuguanjin.top:8101'+updateBrandData.logo"
+			    	>
 			    	<el-upload
                     class="upload-demo"
                     action="http://www.liuguanjin.top:8101/logo"
@@ -308,6 +314,7 @@
 				perPage:4,
 				currentPage:1,
 				isShowAddBrand:false,
+				defaultImage:this.defaultImage,
 				addBrandData:{
 					name:"",
 					cate_id:"",

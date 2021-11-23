@@ -9,7 +9,11 @@
   	:key="index"
   	class="shop-classify" 
   	>
-  		<img :src="'http://www.liuguanjin.top:8101'+item.goods_logo" alt="" @click="toDetail(item.id)">
+  		<img 
+  		:src="defaultImage" 
+ 			v-real-img="'http://www.liuguanjin.top:8101'+item.goods_logo" 
+  		@click="toDetail(item.id)"
+  		>
   		<div class="shop-text">
   			<p class="shop-title" @click="toDetail(item.id)">{{item.goods_name}}</p>
   			<p class="shop-price">￥{{item.goods_price}}</p>
@@ -26,6 +30,7 @@ export default {
 		return {
 			categoryDetailArr:[],
 			id:0,
+			defaultImage:this.defaultImage,
 		}
 	},
  	created(){

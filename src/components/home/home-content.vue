@@ -2,7 +2,11 @@
   <div class="home-content">
   	<!-- 首页内容 -->
 	<div class="content-item" v-for="(item,index) in homeContent">
-		<img :src="'http://www.liuguanjin.top:8101'+item.goods_logo"  @click="enterDetail(item.id,$event)">
+		<img 
+		:src="defaultImage" 
+		v-real-img="'http://www.liuguanjin.top:8100'+item.goods_logo"
+		@click="enterDetail(item.id,$event)"
+		>
 		<p class="title"  @click="enterDetail(item.id,$event)">{{item.goods_name}}</p>
 		<div class="goods-bottom">
 			<div class="price-number">
@@ -23,7 +27,8 @@ export default {
  		return {
  			homeContent:[],
  			refreshing:false,
- 			loading:false
+ 			loading:false,
+ 			defaultImage:this.defaultImage,
  		}
  	},
  	created(){

@@ -2,7 +2,10 @@
 	<!-- 分类页面的内容 -->
 	<div class="classify-main" v-if="!isShow">
 		<!-- 左侧内容 -->
-		<div class="left-content">
+		<div 
+		class="left-content"
+		:style="{height:scrollHeight}"
+		>
 			<ul class="content">
 				<li 
 				v-for="(item,index) in category"
@@ -15,16 +18,16 @@
 			</ul>
 		</div>
 		<!-- 右侧详情 -->
-		<div class="detail-content">
+		<div 
+		class="detail-content"
+		:style="{height:scrollHeight}" 
+		>
 			<div
 			v-for="(item1,index1) in category"
 			:key="index1"
 			class="right-content"
 			v-if="index1===active"
 			>	
-				<div class="right-content-left">
-					
-				</div>
 				<div class="right-content-right">
 					<div  
 				 	v-for="(item2,index2) in item1.son"  
@@ -40,8 +43,8 @@
 					 		@click="toClassifyDetail(item3.id)"
 					 		>
 					 			<img 
-					 			:src="'http://www.liuguanjin.top:8101'+item3.image_url" 
-					 			alt="正在加载"
+					 			:src="defaultImage" 
+					 			v-real-img="'http://www.liuguanjin.top:8101'+item3.image_url"
 					 			>
 					 			<p>{{item3.cate_name}}</p>
 					 		</li>
@@ -59,10 +62,19 @@ export default{
 		return{
 			category:[],
 			active:0,
+			//全局的默认图片地址
+			defaultImage:this.defaultImage
 		}
 	},
 	created(){
 		this.getCategory();
+	},
+	computed:{
+		scrollHeight:()=>{
+			return (window.innerHeight - 120) + 'px';
+		}
+	},
+	mounted(){
 	},
 	methods:{
 		getCategory(){
@@ -83,7 +95,7 @@ export default{
 		},
 		toClassifyDetail(id){
 			this.$router.push({name:'classify-detail',query:{id:id}});
-		}
+		},
 	},
 	props:["isShow"]
 }	
@@ -93,15 +105,13 @@ export default{
 @import url("../less/common.less");
 @import url("../less/reset.less");
 .classify-main{
-	position:relative;
-	width:100%;
-	height:100%;
+	display:flex;
+	flex-direction:row;
 	margin-top:@navHeight;
 	margin-bottom:60px;
 	.left-content{
-		position:absolute;
 		z-index:1;
-		width:10%;
+		overflow-y: scroll;
 		min-width:70px;
 		background-color:#eee;
 		.content{
@@ -119,18 +129,14 @@ export default{
 			}
 		}
 	}
+	.left-content::-webkit-scrollbar{
+		display:none;
+	}
 	.detail-content{
+		overflow-y: scroll;
 		background-color:white;
 		.right-content{
-			display:flex;
-			flex-direction:row;
-			.right-content-left{
-				z-index:0;
-				width:10%;
-				min-width:70px;
-			}
 			.right-content-right{
-				width:90%;
 				h4{
 					height:40px;
 					font-size:14px;
@@ -139,7 +145,6 @@ export default{
 				}
 				.content-detail{
 					.flexRowCenter();
-					justify-content:center;
 					flex-wrap:wrap;
 					margin-left:5%;
 					li{
@@ -167,6 +172,9 @@ export default{
 				}
 			}
 		}
+	}
+	.detail-content::-webkit-scrollbar{
+		display:none;
 	}
 }
 </style>

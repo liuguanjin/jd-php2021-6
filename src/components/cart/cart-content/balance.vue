@@ -31,7 +31,10 @@
 				<span>{{item.goods.shop.shop_name}}</span>
 			</div>
 			<div class="goods-message other">
-				<img :src="'http://www.liuguanjin.top:8101'+item.goods.goods_logo" alt="正在加载">
+				<img 
+				:src="defaultImage" 
+	 			v-real-img="'http://www.liuguanjin.top:8101'+item.goods.goods_logo"
+				>
 				<div class="goods-detail">
 					<span class="goods-name">{{item.goods.goods_name}}</span>
 					<span class="spec-goods">{{item.spec_goods.value_names}}</span>
@@ -90,6 +93,7 @@
 				totalPrice:0,
 				haveAddress:false,
 				user_note:"",
+				defaultImage:this.defaultImage,
 			}
 		},
 		computed:{

@@ -14,6 +14,8 @@ import Balance from '@/components/cart/cart-content/balance.vue';
 import Mine from "@/components/mine/mine.vue";
 //前台商品详情界面
 import Detail from "@/components/home/detail/detail.vue";
+//前台商品所有评论界面
+import GoodsEvaluate from '@/components/home/detail/goods-evaluate.vue';
 //前台店铺详情界面
 import ShopDetail from "@/components/shop/shop_detail.vue";
 //前台注册界面
@@ -170,6 +172,7 @@ var routes = [
 	{path:"/balance",component:Balance,name:'balance',meta:{title:"结算",keepAlive:false}},
 	{path:"/mine",component:Mine,meta:{title:"个人中心",keepAlive:false}},
 	{path:"/detail",component:Detail,name:"detail",meta:{title:"商品详情",keepAlive:false}},
+	{path:"/goodsevaluate",component:GoodsEvaluate,name:"goodsEvaluate",meta:{title:"商品评论",keepAlive:false}},
 	{path:"/shopdetail",component:ShopDetail,name:"shopDetail",meta:{title:"店铺详情",keepAlive:false}},
 	{path:"/regist",component:Regist,meta:{title:"注册",keepAlive:false}},
 	{path:"/logsuc",component:LoginSuccess,name:"logsuc",meta:{title:"个人中心",keepAlive:false}},

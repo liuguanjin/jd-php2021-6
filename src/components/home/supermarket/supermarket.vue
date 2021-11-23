@@ -8,13 +8,19 @@
   	<div class="carousel">
   		<el-carousel :interval="4000" type="card" height="200px">
 		    <el-carousel-item v-for="(item,index) in carousels" :key="index">
-		      	<img :src="item.imgSrc">
+		      	<img 
+		      	:src="defaultImage" 
+		 				v-real-img="item.imgSrc"
+		      	>
 		    </el-carousel-item>
 	  	</el-carousel>
   	</div>
   	<div class="classify">
   		<div v-for="(item,index) in classifys" class="classify-item">
-  			<img :src="item.imgSrc" alt="">
+  			<img 
+  			:src="defaultImage" 
+ 				v-real-img="item.imgSrc"
+  			>
   			<span>{{item.title}}</span>
   		</div>
   	</div>
@@ -30,9 +36,11 @@
   			<span :class="choose4?'active':'common'" @click="pm0">00:00</span>
   		</div>
   		<div class="qianggou-shop">
-	  		<div class="qianggou-item" ref="move" @touchstart="start($event)" @touchend="end($event)" @touchmove="move($event)" :style="{left:left+'px'}"">
 	  			<div class="item" v-for="(item,index) in arr12pm">
-	  				<img :src="item.imgSrc" alt="">
+	  				<img 
+	  				:src="defaultImage" 
+ 						v-real-img="item.imgSrc"
+	  				>
 	  				<p class="title">{{item.title}}</p>
 	  				<p class="price-top">¥{{item.priceTop}}</p>
 	  				<p class="price-bottom">¥{{item.priceBottom}}</p>
@@ -58,7 +66,8 @@ export default {
  			startX:0,
  			endX:0,
  			left:0,
- 			moveFlag:false
+ 			moveFlag:false,
+ 			defaultImage:this.defaultImage,
  		}
  	},
  	created(){
@@ -117,25 +126,6 @@ export default {
  			axios.get("https://person-use.oss-cn-shenzhen.aliyuncs.com/json/supermarket-qianggou.json").then(response=>{
  				this.arr12pm = response.data;
  			})
- 		},
- 		start(e){
- 			this.moveFlag = true;
- 			this.startX = e.touches[0].clientX;
- 			this.endX = 0
- 		},
- 		end(e){
- 			this.moveFlag = false;
- 		},
- 		move(e){
- 			if (this.moveFlag) {
- 				var moveX = this.endX + (e.touches[0].clientX - this.startX)/10
- 				this.left += moveX;
- 			}
- 			if (this.left>0) {
- 				this.left = 0;
- 			}else if (this.left<-917){
- 				this.left = -917;
- 			}
  		},
  		back(){
  			this.$router.go(-1);
@@ -230,33 +220,28 @@ export default {
 				}
 			}
 			.qianggou-shop{
-				position:relative;
-				overflow:hidden;
-				width:100%;
-				height:200px;
-				.qianggou-item{
-					position:absolute;
-					top:0;
-					.flexRowCenter();
-					width:100%;
-					transition: all 0.1s;
-					.item{
-						width:35%;
-						img{
-							width:100%;
-						}
-						.title{
-							overflow:hidden;
-							width:100%;
-							text-overflow:ellipsis;
-							white-space:nowrap;
-						}
-						.price-top{
-							color:#ccc;
-						}
+				display:flex;
+				flex-direction:row;
+				align-items:center;
+				flex-wrap:no-wrap;
+				overflow-x: scroll;
+				.item{
+					width:35%;
+					img{
+						width:100%;
+					}
+					.title{
+						overflow:hidden;
+						width:100%;
+						text-overflow:ellipsis;
+						white-space:nowrap;
+					}
+					.price-top{
+						color:#ccc;
 					}
 				}
 			}
+			
 		}
 	}
 </style>

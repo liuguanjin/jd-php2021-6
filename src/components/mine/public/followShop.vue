@@ -1,7 +1,7 @@
 <template>
 	<!-- 关注店铺界面 -->
 	<div class="follow-shop">
-		<div class="head">
+		<div class="header">
 	  		<i class="el-icon-back back" @click="back"></i>
 			<p>关注店铺</p>
 		</div>
@@ -10,14 +10,18 @@
 		v-for="(item,index) in shopCollectDetail"
 		:key="index"
 		>
-			<img :src="'http://www.liuguanjin.top:8101'+item.shop_logo" alt="正在加载">
+			<img 
+			:src="defaultImage" 
+ 			v-real-img="'http://www.liuguanjin.top:8101'+item.shop_logo"
+			>
 			<div class="shop-right">
 				<p class="shop-name" @click="enterShop(item.id)">{{item.shop_name}}</p>
 				<span class="sign">店铺</span>
 				<div class="goods">
 					<div class="goods-item" v-for="(item1,index1) in item.goods">
 						<img 
-						:src="'http://www.liuguanjin.top:8101'+item1.goods_logo" alt="正在加载"
+						:src="defaultImage" 
+		 				v-real-img="'http://www.liuguanjin.top:8101'+item1.goods_logo"
 						@click="enterGoods(item1.id)"
 						>
 					</div>
@@ -37,6 +41,7 @@
 				shopCollectArr:[],
 				shopCollectDetail:[],
 				isShowTips:false,
+				defaultImage:this.defaultImage,
 			}
 		},
 		methods:{
@@ -85,7 +90,7 @@
 		.flexColumnCenter();
 		padding-bottom:10px;
 		background-color:#eee;
-		.head{
+		.header{
 			.flexRowCenter();
 			justify-content:flex-start;
 			width:100%;
@@ -95,6 +100,7 @@
 			.back{
 				margin-left:10px;
 				font-size:16px;
+				cursor: pointer;
 			}
 			p{
 				margin:0 auto;

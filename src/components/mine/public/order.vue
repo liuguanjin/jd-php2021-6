@@ -19,7 +19,10 @@
 		    				<p class="shop-name" @click="enterShop(item1.shop_id)">{{item1.shop_name}}</p>
 		    			</div>
 		    			<div class="goods-content">
-		    				<img :src="'http://www.liuguanjin.top:8101'+item1.goods_logo" alt="正在加载">
+		    				<img 
+		    				:src="defaultImage" 
+		 					v-real-img="'http://www.liuguanjin.top:8100'+item1.goods_logo"
+		    				>
 		    				<div class="goods-content-center">
 		    					<p class="goods-name" @click="enterGoods(item1.goods_id)">{{item1.goods_name}}</p>
 		    					<p class="value-name">{{item1.spec_value_names}}</p>
@@ -116,7 +119,10 @@
 		    				<p class="shop-name" @click="enterShop(item.shop_id)">{{item.shop_name}}</p>
 		    			</div>
 		    			<div class="goods-content">
-		    				<img :src="'http://www.liuguanjin.top:8101'+item.goods_logo" alt="正在加载">
+		    				<img 
+		    				:src="defaultImage" 
+		 					v-real-img="'http://www.liuguanjin.top:8101'+item.goods_logo"
+		    				>
 		    				<div class="goods-content-center">
 		    					<p class="goods-name" @click="enterGoods(item.goods_id)">{{item.goods_name}}</p>
 		    					<p class="value-name">{{item.spec_value_names}}</p>
@@ -144,7 +150,10 @@
 		    				<p class="shop-name" @click="enterShop(item.shop_id)">{{item.shop_name}}</p>
 		    			</div>
 		    			<div class="goods-content">
-		    				<img :src="'http://www.liuguanjin.top:8101'+item.goods_logo" alt="正在加载">
+		    				<img 
+		    				:src="defaultImage" 
+		 					v-real-img="'http://www.liuguanjin.top:8101'+item.goods_logo"
+		    				>
 		    				<div class="goods-content-center">
 		    					<p class="goods-name" @click="enterGoods(item.goods_id)">{{item.goods_name}}</p>
 		    					<p class="value-name">{{item.spec_value_names}}</p>
@@ -172,7 +181,10 @@
 		    				<p class="shop-name" @click="enterShop(item.shop_id)">{{item.shop_name}}</p>
 		    			</div>
 		    			<div class="goods-content">
-		    				<img :src="'http://www.liuguanjin.top:8101'+item.goods_logo" alt="正在加载">
+		    				<img 
+		    				:src="defaultImage" 
+		 					v-real-img="'http://www.liuguanjin.top:8101'+item.goods_logo"
+		    				>
 		    				<div class="goods-content-center">
 		    					<p class="goods-name" @click="enterGoods(item.goods_id)">{{item.goods_name}}</p>
 		    					<p class="value-name">{{item.spec_value_names}}</p>
@@ -203,7 +215,10 @@
 		    				<p class="shop-name" @click="enterShop(item.shop_id)">{{item.shop_name}}</p>
 		    			</div>
 		    			<div class="goods-content">
-		    				<img :src="'http://www.liuguanjin.top:8101'+item.goods_logo" alt="正在加载">
+		    				<img 
+		    				:src="defaultImage" 
+		 					v-real-img="'http://www.liuguanjin.top:8101'+item.goods_logo"
+		    				>
 		    				<div class="goods-content-center">
 		    					<p class="goods-name" @click="enterGoods(item.goods_id)">{{item.goods_name}}</p>
 		    					<p class="value-name">{{item.spec_value_names}}</p>
@@ -233,7 +248,10 @@
 		    				<p class="shop-name" @click="enterShop(item.shop_id)">{{item.shop_name}}</p>
 		    			</div>
 		    			<div class="goods-content">
-		    				<img :src="'http://www.liuguanjin.top:8101'+item.goods_logo" alt="正在加载">
+		    				<img 
+		    				:src="defaultImage" 
+		 					v-real-img="'http://www.liuguanjin.top:8101'+item.goods_logo"
+		    				>
 		    				<div class="goods-content-center">
 		    					<p class="goods-name" @click="enterGoods(item.goods_id)">{{item.goods_name}}</p>
 		    					<p class="value-name">{{item.spec_value_names}}</p>
@@ -269,6 +287,7 @@
 				noacceptList:[],
 				noevaluateList:[],
 				refundList:[],
+				defaultImage:this.defaultImage,
 			}
 		},
 		created(){

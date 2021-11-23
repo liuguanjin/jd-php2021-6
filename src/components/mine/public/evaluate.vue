@@ -7,7 +7,10 @@
 		</div>
 		<div class="evaluate-goods">
 			<div class="goods-top">
-				<img :src="'http://www.liuguanjin.top:8101'+evaluateGoods.goods_logo" alt="正在加载">
+				<img 
+				:src="defaultImage" 
+	 			v-real-img="'http://www.liuguanjin.top:8101'+evaluateGoods.goods_logo"
+				>
 				<div class="goods-detail">
 					<span>{{evaluateGoods.goods_name}}</span>
 					<span>{{evaluateGoods.spec_value_names}}</span>
@@ -27,14 +30,19 @@
 				</div>
 			</div>
 			<div class="evaluate-keyword">
-				<span v-for="(item,index) in keyword">{{item}}</span>
+				<span 
+				v-for="(item,index) in keyword"
+				@click="chooseKeyword(index)"
+				>
+					{{item}}
+				</span>
 			</div>
 			<textarea 
 			placeholder="从多个角度评价宝贝，可以帮助更多想买的人"
 			class="evaluate-input"
 			rows="10"
 			cols="50"
-			v-model="evaluateData.content" 
+			v-model="content" 
 			></textarea>
 			<p class="tips">再写<span>10</span>字有机会被精选</p>
 			<el-upload
@@ -92,6 +100,7 @@
 		data(){
 			return {
 				id:0,
+				defaultImage:this.defaultImage,
 				evaluateGoods:{
 
 				},
@@ -103,10 +112,12 @@
 				myData:{
 					type:'evaluate'
 				},
+				content:"",
 				imagesList:[],
 				evaluateData:{
 					goods_id:"",
 					user_id:"",
+					shop_id:"",
 					content:"",
 					evaluate_grade:0,
 					evaluate_describe_score:5.0,
@@ -162,10 +173,18 @@
 				}
 				this.evaluateData.evaluate_grade = index;
 			},
+			chooseKeyword(index){
+				this.content += this.keyword[index] + ' ' + ':'+ ' ' + `\n`;
+			},
 			evaluate(){
 				this.evaluateData.goods_id = this.evaluateGoods.goods_id;
+				this.evaluateData.shop_id = this.evaluateGoods.shop_id;
 				var userinfo = JSON.parse(localStorage.getItem('userinfo'));
 				this.evaluateData.user_id = userinfo.user_id;
+				var content = this.content;
+				content = content.replace(/\n/g,'<br />');
+				content = content.replace(/ /g,'&nbsp');
+				this.evaluateData.content = content;
 				this.$homehttp({
 					url:'evaluate/'+this.id,
 					method:'post',

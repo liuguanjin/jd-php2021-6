@@ -3,7 +3,10 @@
   		<div class="logsuc-header">
   			<div class="head-top">
           <div class="head-img">
-  	  			<img :src="userDetail.avatar?'http://www.liuguanjin.top:8101'+userDetail.avatar:''" alt="">
+  	  			<img 
+            :src="defaultImage" 
+            v-real-img="'http://www.liuguanjin.top:8101'+userDetail.avatar"
+            >
     				<p>{{userDetail.nickname}}</p>
           </div>
 	  			<div class="iconbox">
@@ -125,6 +128,7 @@ export default {
         noacceptNumber:0,
         noevaluateNumber:0,
         refundNumber:0,
+        defaultImage:this.defaultImage,
         userDetail:{
 
         },

@@ -3,7 +3,10 @@
   	<!-- 首页轮播图 -->
 	<el-carousel :interval="4000" type="card" height="200px">
 	    <el-carousel-item v-for="(item,index) in carousels" :key="index">
-	      	<img :src="item.imgSrc">
+	      	<img 
+	      	:src="defaultImage" 
+		 			v-real-img="item.imgSrc"
+	      	>
 	    </el-carousel-item>
   	</el-carousel>
   </div>
@@ -14,7 +17,8 @@ import axios from "axios";
 export default {
  	data(){
  		return {
- 			carousels:[]
+ 			carousels:[],
+ 			defaultImage:this.defaultImage,
  		}
  	},
  	created(){

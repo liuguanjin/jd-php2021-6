@@ -50,7 +50,10 @@
 	    	align="center"
 	    	>
 		    	<template slot-scope="scope">
-		    		<img :src="'http://www.liuguanjin.top:8101'+scope.row.shop_logo" alt="正在加载">
+		    		<img 
+		    		:src="defaultImage" 
+		 			v-real-img="'http://www.liuguanjin.top:8101'+scope.row.shop_logo"
+		    		>
 		      	</template>
 	    	</el-table-column> 
     	 	<el-table-column
@@ -209,7 +212,10 @@
 			    <el-form-item 
 			    label="店铺图片" 
 			    >
-			    	<img :src="'http://www.liuguanjin.top:8101'+updateStoreData.shop_logo" alt="正在加载">
+			    	<img 
+			    	:src="defaultImage" 
+		 			v-real-img="'http://www.liuguanjin.top:8101'+updateStoreData.shop_logo"
+			    	>
 			    	<el-upload
                     class="upload-demo"
                     action="http://www.liuguanjin.top:8101/logo"
@@ -255,6 +261,7 @@ export default {
 			keyword:"",
 			isShowAddStore:false,
 			isShowUpdateStore:false,
+			defaultImage:this.defaultImage,
 			currentPage:1,
 			total:1,
 			perPage:10,

@@ -51,7 +51,10 @@
 	    	align="center"
 	    	>
 		    	<template slot-scope="scope">
-		    		<img :src="'http://www.liuguanjin.top:8101'+scope.row.image_url" alt="正在加载">
+		    		<img 
+		    		:src="defaultImage" 
+		 			v-real-img="'http://www.liuguanjin.top:8101'+scope.row.image_url"
+		    		>
 		      	</template>
 	    	</el-table-column> 
 	    	<el-table-column
@@ -289,7 +292,10 @@
 			    <el-form-item 
 			    label="分类图片" 
 			    >
-			    	<img :src="'http://www.liuguanjin.top:8101'+updateCategoryData.image_url" alt="正在加载">
+			    	<img 
+			    	:src="defaultImage" 
+		 			v-real-img="'http://www.liuguanjin.top:8101'+updateCategoryData.image_url"
+			    	>
 			    	<el-upload
                     class="upload-demo"
                     action="http://www.liuguanjin.top:8101/logo"
@@ -335,6 +341,7 @@
 				keyword:"",
 				categoryList:[],
 				isShowAddCategory:false,
+				defaultImage:this.defaultImage,
 				addCategoryData:{
 					cate_name:"",
 					image_url:"",

@@ -6,7 +6,10 @@
   	</div>
   	<div class="collect-content">
   		<div class="collect-good" v-for="(item,index) in collectDetail" @click="toDetail(item.id)">
-  			<img :src="'http://www.liuguanjin.top:8101'+item.goods_logo" alt="">
+  			<img 
+  			:src="defaultImage" 
+	 			v-real-img="'http://www.liuguanjin.top:8101'+item.goods_logo"
+  			>
   			<div>
   				<p class="title">{{item.goods_name}}</p>
   				<p class="price">¥{{item.goods_price}}</p>
@@ -21,7 +24,8 @@ import {mapState} from "vuex";
 export default {
 	data(){
 		return {
-			collectDetail:[]
+			collectDetail:[],
+			defaultImage:this.defaultImage,
 		}
 	},
 	methods:{
@@ -69,6 +73,7 @@ export default {
 			}
 			.back{
 				margin-left:10px;
+				cursor: pointer;
 			}
 		}
 		.collect-content{

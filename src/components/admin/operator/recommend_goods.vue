@@ -43,7 +43,10 @@
 	    	align="center"
 	    	>
 		    	<template slot-scope="scope">
-		    		<img :src="'http://www.liuguanjin.top:8101'+scope.row.goods_logo" alt="正在加载">
+		    		<img 
+		    		:src="defaultImage" 
+		 			v-real-img="'http://www.liuguanjin.top:8101'+scope.row.goods_logo"
+		    		>
 		      	</template>
 	    	</el-table-column>
 	    	<el-table-column
@@ -89,6 +92,7 @@
 				currentPage:1,
 				total:1,
 				perPage:10,
+				defaultImage:this.defaultImage,
 			}
 		},
 		methods:{

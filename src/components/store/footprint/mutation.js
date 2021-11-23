@@ -4,7 +4,7 @@ export default{
 		var inFoorArr = false;
 		var arr = state.foorprintArr;
 		for(var i = 0;i < arr.length;i ++ ){
-			if (date == arr[i].date) {
+			if ((date - arr[i].date) <= 86400) {
 				var inDetailArr = false;
 				var detailArr = arr[i].detail;
 				for(var j = 0;j < detailArr.length;j ++ ){
@@ -13,14 +13,14 @@ export default{
 					}
 				}
 				if (! inDetailArr) {
-					arr[i].detail.push(obj.detail[0]);
+					arr[i].detail.unshift(obj.detail[0]);
 					state.footprintNum += 1;
 				}
 				inFoorArr = true;
 			}
 		}
 		if (! inFoorArr) {
-			arr.push(obj);
+			arr.unshift(obj);
 			state.footprintNum += 1;
 		}
 		state.foorprintArr = arr;
