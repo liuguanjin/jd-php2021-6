@@ -147,6 +147,7 @@ export default {
 				height:44px;
 				margin-left:10px;
 				line-height:44px;
+				cursor:pointer;
 			}
 			.title{
 				height:44px;

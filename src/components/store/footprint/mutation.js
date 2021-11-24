@@ -4,7 +4,10 @@ export default{
 		var inFoorArr = false;
 		var arr = state.foorprintArr;
 		for(var i = 0;i < arr.length;i ++ ){
-			if ((date - arr[i].date) <= 86400) {
+			if (new Date(date*1000).getFullYear() == new Date(arr[i].date*1000).getFullYear()
+				&& new Date(date*1000).getMonth() == new Date(arr[i].date*1000).getMonth()
+				&& new Date(date*1000).getDate() == new Date(arr[i].date*1000).getDate()
+				) {
 				var inDetailArr = false;
 				var detailArr = arr[i].detail;
 				for(var j = 0;j < detailArr.length;j ++ ){

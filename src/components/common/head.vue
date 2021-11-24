@@ -29,6 +29,7 @@ export default {
 			left:@commonMargin;
 			top:(@navHeight - @iconSize)/2;
 			font-size:@iconSize;
+			cursor: pointer;
 		}
 	}
 </style>

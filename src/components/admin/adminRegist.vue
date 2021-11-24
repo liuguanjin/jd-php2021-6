@@ -259,6 +259,9 @@ export default {
 		.el-form{
 			width:100%;
 			.verify{
+				img{
+					cursor: pointer;
+				}
 				/deep/ .el-form-item__content{
 					display:flex;
 					flex-direction:row;
